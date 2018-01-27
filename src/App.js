@@ -4,13 +4,15 @@ import './App.css';
 
 class App extends Component {
   render() {
-    const tireDiameter = 26; // Inches
-    const finalDrive = 3.31;
-    const gears = [4.236, 2.538, 1.665, 1.238, 1, 0.704];
-    const rpms = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
+    const drivetrain = {
+      tireDiameter: 26, // Inches
+      finalDrive: 3.31,
+      gears: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
+      rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
+    };
 
     var gearSections =
-      this.buildGearSection(tireDiameter, finalDrive, gears, rpms);
+      this.buildGearSection(drivetrain);
 
     return (
       <div className="App">
@@ -25,12 +27,12 @@ class App extends Component {
     );
   }
 
-  buildGearSection(tireDiameter, finalDrive, gears, rpms) {
+  buildGearSection(drivetrain) {
     var gearSections = [];
 
     var index = 1;
-    for (let gear of gears) {
-      var rpmRows = this.buildRpmRows(tireDiameter, finalDrive, gear, rpms);
+    for (let gear of drivetrain.gears) {
+      var rpmRows = this.buildRpmRows(drivetrain, gear);
 
       gearSections.push(<div>Gear {index++} ({gear})</div>)
       gearSections.push(rpmRows);
@@ -39,10 +41,10 @@ class App extends Component {
     return gearSections;
   }
 
-  buildRpmRows(tireDiameter, finalDrive, gear, rpms) {
+  buildRpmRows(drivetrain, gear) {
     var rpmRows = [];
-    for (let rpm of rpms) {
-      let speed = this.calculateSpeed(tireDiameter, finalDrive, gear, rpm);
+    for (let rpm of drivetrain.rpms) {
+      let speed = this.calculateSpeed(drivetrain, gear, rpm);
       rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
     }
 
@@ -51,9 +53,10 @@ class App extends Component {
 
   // I pulled this jank math from:
   // http://www.hotrod.com/articles/speed-rpm-gear-ratio-tire-size-formula/
-  calculateSpeed(tireDiameter, finalDrive, gearRatio, rpm) {
-    const speed = (rpm * tireDiameter) / (finalDrive * gearRatio * 336.13)
-    return Math.round(speed);
+  calculateSpeed(drivetrain, gearRatio, rpm) {
+    const numer = rpm * drivetrain.tireDiameter;
+    const denom = drivetrain.finalDrive * gearRatio * 336.13;
+    return Math.round(numer / denom);
   }
 }
 
