@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import * as Calculator from './GearingCalculator.js';
 
 class App extends Component {
   render() {
@@ -41,19 +42,13 @@ class App extends Component {
   buildRpmRows(drivetrain, gear) {
     var rpmRows = [];
     for (let rpm of drivetrain.rpms) {
-      let speed = this.calculateSpeed(drivetrain, gear, rpm);
+      let speed = Calculator.speed(
+        drivetrain.tireDiameter, drivetrain.finalDrive, gear, rpm);
+
       rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
     }
 
     return rpmRows
-  }
-
-  // I pulled this jank math from:
-  // http://www.hotrod.com/articles/speed-rpm-gear-ratio-tire-size-formula/
-  calculateSpeed(drivetrain, gearRatio, rpm) {
-    const numer = rpm * drivetrain.tireDiameter;
-    const denom = drivetrain.finalDrive * gearRatio * 336.13;
-    return Math.round(numer / denom);
   }
 }
 
