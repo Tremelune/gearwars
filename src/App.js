@@ -13,7 +13,11 @@ class App extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
     };
 
-    const data = [['Gear', 'Fifth'], [0, 0], [9000, 299]];
+    const data = [
+      ['Gear', 'Fifth'], [0, 0], [9000, 299],
+      ['Gear', 'Fourth'], [0, 0], [9000, 200],
+      ['Gear', 'Third'], [0, 0], [9000, 150]
+    ];
 
     return (
       <div className="App">
