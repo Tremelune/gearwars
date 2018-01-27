@@ -14,21 +14,10 @@ class App extends Component {
     const tireDiameter = 26; // Inches
     const finalDrive = 3.31;
     const gears = [4.236, 2.538, 1.665, 1.238, 1, 0.704];
+    const rpms = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
 
-    var rpms = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
-
-    var gearSections = [];
-    var index = 1;
-    for (let gear of gears) {
-      var rpmRows = [];
-      for (let rpm of rpms) {
-        let speed = this.calculateSpeed(tireDiameter, finalDrive, gear, rpm);
-        rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
-      }
-
-      gearSections.push(<div>Gear {index++} ({gear})</div>)
-      gearSections.push(rpmRows);
-    }
+    var gearSections =
+      this.buildGearSection(tireDiameter, finalDrive, gears, rpms);
 
     return (
       <div className="App">
@@ -41,6 +30,24 @@ class App extends Component {
         </p>
       </div>
     );
+  }
+
+  buildGearSection(tireDiameter, finalDrive, gears, rpms) {
+    var gearSections = [];
+
+    var index = 1;
+    for (let gear of gears) {
+      var rpmRows = [];
+      for (let rpm of rpms) {
+        let speed = this.calculateSpeed(tireDiameter, finalDrive, gear, rpm);
+        rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
+      }
+
+      gearSections.push(<div>Gear {index++} ({gear})</div>)
+      gearSections.push(rpmRows);
+    }
+
+    return gearSections;
   }
 }
 
