@@ -3,20 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  // I pulled this jank math from:
+  // http://www.hotrod.com/articles/speed-rpm-gear-ratio-tire-size-formula/
+  calculateSpeed(tireDiameter, finalDrive, gearRatio, rpm) {
+    const speed = (rpm * tireDiameter) / (finalDrive * gearRatio * 336.13)
+    return Math.round(speed);
+  }
+
   render() {
-    // const finalDrive = 3.31;
-    // const gears = [4.236, 2.538, 1.665, 1.238, ]
+    const tireDiameter = 26; // Inches
+    const finalDrive = 3.31;
+    const gears = [4.236, 2.538, 1.665, 1.238, 1, 0.704];
 
     var rpms = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
 
     var gearSections = [];
-    for (let i=1; i<9; i++) {
+    var index = 1;
+    for (let gear of gears) {
       var rpmRows = [];
       for (let rpm of rpms) {
-        rpmRows.push(<ol>{rpm}rpm: 0 mph</ol>)
+        let speed = this.calculateSpeed(tireDiameter, finalDrive, gear, rpm);
+        rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
       }
 
-      gearSections.push(<div>Gear {i}</div>) //todo Fuckin' BRs.
+      gearSections.push(<div>Gear {index++} ({gear})</div>)
       gearSections.push(rpmRows);
     }
 
