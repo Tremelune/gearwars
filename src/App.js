@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import * as Calculator from './GearingCalculator.js';
+import { Chart } from 'react-google-charts';
 
 class App extends Component {
   render() {
@@ -18,9 +19,23 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          {this.buildGearSection(drivetrain)}
-        </p>
+
+        <div className={'chart'}>
+          <Chart
+            chartType="LineChart"
+            data={[['Age', 'Weight'], [8, 12], [4, 5.5]]}
+            options={{}}
+            graph_id="LineChart"
+            width="100%"
+            height="400px"
+            legend_toggle
+          />
+        </div>
+        <div>
+          <p className="App-intro">
+            {this.buildGearSection(drivetrain)}
+          </p>
+        </div>
       </div>
     );
   }
@@ -42,8 +57,7 @@ class App extends Component {
   buildRpmRows(drivetrain, gear) {
     var rpmRows = [];
     for (let rpm of drivetrain.rpms) {
-      let speed = Calculator.speed(
-        drivetrain.tireDiameter, drivetrain.finalDrive, gear, rpm);
+      let speed = Calculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gear, rpm);
 
       rpmRows.push(<ol>{rpm}rpm: {speed}mph</ol>)
     }
