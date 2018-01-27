@@ -23,7 +23,7 @@ class App extends Component {
         <div className={'chart'}>
           <Chart
             chartType="LineChart"
-            data={[['Age', 'Weight'], [8, 12], [4, 5.5]]}
+            data={[['Age', 'Fifth'], [0, 0], [9000, 299]]}
             options={{}}
             graph_id="LineChart"
             width="100%"
