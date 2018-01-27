@@ -11,9 +11,6 @@ class App extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
     };
 
-    var gearSections =
-      this.buildGearSection(drivetrain);
-
     return (
       <div className="App">
         <header className="App-header">
@@ -21,7 +18,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          {gearSections}
+          {this.buildGearSection(drivetrain)}
         </p>
       </div>
     );
