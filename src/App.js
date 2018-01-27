@@ -13,6 +13,8 @@ class App extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
     };
 
+    const data = [['Gear', 'Fifth'], [0, 0], [9000, 299]];
+
     return (
       <div className="App">
         <header className="App-header">
@@ -23,7 +25,7 @@ class App extends Component {
         <div className={'chart'}>
           <Chart
             chartType="LineChart"
-            data={[['Age', 'Fifth'], [0, 0], [9000, 299]]}
+            data={data}
             options={{}}
             graph_id="LineChart"
             width="100%"
