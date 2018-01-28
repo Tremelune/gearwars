@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Chart as GoogleChart } from 'react-google-charts';
+import * as Wrangler from '../ChartDataWrangler.js';
 
 export default class Chart extends Component {
   constructor() {
@@ -12,20 +13,7 @@ export default class Chart extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
     };
 
-    this.state = {
-      options: {
-        hAxis: {title: 'mph', minValue: 0, maxValue: 200},
-        vAxis: {title: 'rpm', minValue: 0, maxValue: 6800},
-      },
-
-      columns: [
-        {type: 'number', label: 'x'},
-        {type: 'number', label: 'gear1'},
-        {type: 'number', label: 'gear2'},
-      ],
-
-      rows: [[0, 0, 0], [200, 5000, 6800]],
-    }
+    this.state = Wrangler.toData(drivetrain);
   }
 
   render() {
