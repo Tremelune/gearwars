@@ -10,25 +10,23 @@ class App extends Component {
       tireDiameter: 26, // Inches
       finalDrive: 3.31,
       gears: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-      rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
+      rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
     };
 
     const options = {
-      hAxis: {
-        title: 'mph',
-        viwWindowMode: 'maximized'
-      },
-      vAxis: {
-        title: 'rpm',
-        viewWindow: {max: 9000}
-      },
+      hAxis: {title: 'mph', minValue: 0, maxValue: 200},
+      vAxis: {title: 'rpm', minValue: 0, maxValue: 6800},
     };
 
-    const data = [
-      ['Gear', 'Fifth'],
-      [0, 0], [300, 9000],
-      [0, 0], [200, 9000],
-      [0, 0], [150, 9000],
+    const columns = [
+      {type: 'number', label: 'x'},
+      {type: 'number', label: 'gear1'},
+      {type: 'number', label: 'gear2'},
+    ];
+
+    // [x, y1, y2]
+    const rows = [
+      [0, 0, 0], [200, 5000, 6800]
     ];
 
     return (
@@ -41,7 +39,8 @@ class App extends Component {
         <div className={'chart'}>
           <Chart
             chartType="LineChart"
-            data={data}
+            columns={columns}
+            rows={rows}
             options={options}
             graph_id="LineChart"
             width="100%"
