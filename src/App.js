@@ -13,10 +13,22 @@ class App extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000],
     };
 
+    const options = {
+      hAxis: {
+        title: 'mph',
+        viwWindowMode: 'maximized'
+      },
+      vAxis: {
+        title: 'rpm',
+        viewWindow: {max: 9000}
+      },
+    };
+
     const data = [
-      ['Gear', 'Fifth'], [0, 0], [9000, 299],
-      ['Gear', 'Fourth'], [0, 0], [9000, 200],
-      ['Gear', 'Third'], [0, 0], [9000, 150]
+      ['Gear', 'Fifth'],
+      [0, 0], [300, 9000],
+      [0, 0], [200, 9000],
+      [0, 0], [150, 9000],
     ];
 
     return (
@@ -30,7 +42,7 @@ class App extends Component {
           <Chart
             chartType="LineChart"
             data={data}
-            options={{}}
+            options={options}
             graph_id="LineChart"
             width="100%"
             height="400px"
