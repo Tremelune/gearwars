@@ -1,21 +1,28 @@
+
+import * as Calculator from './GearingCalculator.js';
+
 /**
  * Converts data into format easily chartable by Chart:
  * {options, columns, rows}
  */
 export function toData(redline, gearRatios) {
-  // Oh, actually, this does nothing...
+  let columnNames = gearRatios.map((gearRatio, index) => {
+    return 'Gear ' + (index + 1); // There is no zeroeth gear.
+  });
+  columnNames.unshift('x') // X-axis value corresponding to the multiple y-axis RPM values
+
+  let columns = columnNames.map((name, index) => {
+    return {type: 'number', label: name};
+  });
+
   return {
     options: {
-      hAxis: {title: 'mph', minValue: 0, maxValue: 200},
-      vAxis: {title: 'rpm', minValue: 0, maxValue: 6800},
+      hAxis: {title: 'mph'},
+      vAxis: {title: 'rpm'},
     },
 
-    columns: [
-      {type: 'number', label: 'x'},
-      {type: 'number', label: 'Sixth'},
-      {type: 'number', label: 'Fifth'},
-    ],
+    columns,
 
-    rows: [[0, 0, 0], [200, 5000, 6800]],
+    rows: [[0, 0, 0, 0, 0, 0, 0], [200, 1200, 2400, 3300, 4400, 5000, 6800]],
   }
 }
