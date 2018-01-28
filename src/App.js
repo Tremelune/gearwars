@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Chart from './components/Chart.js';
 import * as Calculator from './GearingCalculator.js';
-import { Chart } from 'react-google-charts';
 
 class App extends Component {
   render() {
@@ -13,22 +13,6 @@ class App extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
     };
 
-    const options = {
-      hAxis: {title: 'mph', minValue: 0, maxValue: 200},
-      vAxis: {title: 'rpm', minValue: 0, maxValue: 6800},
-    };
-
-    const columns = [
-      {type: 'number', label: 'x'},
-      {type: 'number', label: 'gear1'},
-      {type: 'number', label: 'gear2'},
-    ];
-
-    // [x, y1, y2]
-    const rows = [
-      [0, 0, 0], [200, 5000, 6800]
-    ];
-
     return (
       <div className="App">
         <header className="App-header">
@@ -36,18 +20,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
 
-        <div className={'chart'}>
-          <Chart
-            chartType="LineChart"
-            columns={columns}
-            rows={rows}
-            options={options}
-            graph_id="LineChart"
-            width="100%"
-            height="400px"
-            legend_toggle
-          />
-        </div>
+        <Chart />
+
         <div>
           <p className="App-intro">
             {this.buildGearSection(drivetrain)}
