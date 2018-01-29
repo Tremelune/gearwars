@@ -13,7 +13,6 @@ class Chart extends Component {
       redline: 6800,
     };
 
-    // todo: This only draws four gears...
     this.state = ChartWrangler.toData(drivetrain);
   }
 
