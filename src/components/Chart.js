@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Chart as GoogleChart } from 'react-google-charts';
+import {LineChart} from 'react-easy-chart';
 import * as Wrangler from '../ChartDataWrangler.js';
 
 export default class Chart extends Component {
@@ -19,16 +19,20 @@ export default class Chart extends Component {
   render() {
     return (
       <div className={'chart'}>
-          <GoogleChart
-            chartType="LineChart"
-            options={this.state.options}
-            columns={this.state.columns}
-            rows={this.state.rows}
-            graph_id="LineChart"
-            width="100%"
-            height="400px"
-            legend_toggle
-          />
+      <LineChart
+        grid
+        verticalGrid
+        axes
+        axisLabels={{x: 'mph', y: 'rpm'}}
+        width={1000}
+        height={500}
+        xTicks={20}
+        yTicks={5}
+        data={[
+          [{x: 0, y: 0}, {x: 200, y: 6800}],
+          [{x: 0, y: 0}, {x: 150, y: 6800}]
+        ]}
+        />
       </div>
     );
   }
