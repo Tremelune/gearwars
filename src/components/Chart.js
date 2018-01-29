@@ -13,7 +13,7 @@ export default class Chart extends Component {
       rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
     };
 
-    this.state = Wrangler.toData(6800, drivetrain.gears);
+    this.state = Wrangler.toData(drivetrain);
   }
 
   render() {
