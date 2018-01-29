@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import * as ChartWrangler from '../biz/ChartDataWrangler.js';
 
-export default class Chart extends Component {
+class Chart extends Component {
   constructor() {
     super();
 
@@ -15,7 +15,6 @@ export default class Chart extends Component {
 
     // todo: This only draws four gears...
     this.state = ChartWrangler.toData(drivetrain);
-    console.log(this.state);
   }
 
   render() {
@@ -37,3 +36,5 @@ export default class Chart extends Component {
     );
   }
 }
+
+export default Chart;
