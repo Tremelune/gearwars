@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
-import * as Wrangler from '../ChartDataWrangler.js';
+import * as ChartWrangler from '../biz/ChartDataWrangler.js';
 
 export default class Chart extends Component {
   constructor() {
@@ -13,7 +13,8 @@ export default class Chart extends Component {
       redline: 6800,
     };
 
-    this.state = Wrangler.toData(drivetrain);
+    // todo: This only draws four gears...
+    this.state = ChartWrangler.toData(drivetrain);
   }
 
   render() {

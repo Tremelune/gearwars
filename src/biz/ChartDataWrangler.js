@@ -10,6 +10,7 @@ import * as Calculator from './GearingCalculator.js';
 export function toData(drivetrain) {
   return drivetrain.gearRatios.map((gearRatio, index) => {
     let speed = Calculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
+    console.log('Speed for ' + gearRatio + ': ' + speed);
     return [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
   });
 }
