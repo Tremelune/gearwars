@@ -15,6 +15,7 @@ export default class Chart extends Component {
 
     // todo: This only draws four gears...
     this.state = ChartWrangler.toData(drivetrain);
+    console.log(this.state);
   }
 
   render() {
@@ -29,6 +30,7 @@ export default class Chart extends Component {
         height={500}
         xTicks={20}
         yTicks={5}
+        lineColors={['red', 'blue', 'black', 'green', 'orange', 'pink', 'cyan', 'purple', 'yellow', 'gray']}
         data={this.state}
         />
       </div>
