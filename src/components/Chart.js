@@ -9,8 +9,8 @@ export default class Chart extends Component {
     const drivetrain = {
       tireDiameter: 26, // Inches
       finalDrive: 3.31,
-      gears: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-      rpms: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
+      gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
+      redline: 6800,
     };
 
     this.state = Wrangler.toData(drivetrain);
@@ -28,10 +28,7 @@ export default class Chart extends Component {
         height={500}
         xTicks={20}
         yTicks={5}
-        data={[
-          [{x: 0, y: 0}, {x: 200, y: 6800}],
-          [{x: 0, y: 0}, {x: 150, y: 6800}]
-        ]}
+        data={this.state}
         />
       </div>
     );

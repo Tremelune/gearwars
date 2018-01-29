@@ -1,21 +1,15 @@
+import * as Calculator from './GearingCalculator.js';
+
 /**
  * Converts data into format easily chartable by Chart:
- * {options, columns, rows}
+ * [
+ *   [{x: 0, y: 0}, {x: 200, y: 6800}],
+ *   [{x: 0, y: 0}, {x: 150, y: 6800}]
+ * ]
  */
-export function toData(redline, gearRatios) {
-  // Oh, actually, this does nothing...
-  return {
-    options: {
-      hAxis: {title: 'mph', minValue: 0, maxValue: 200},
-      vAxis: {title: 'rpm', minValue: 0, maxValue: 6800},
-    },
-
-    columns: [
-      {type: 'number', label: 'x'},
-      {type: 'number', label: 'Sixth'},
-      {type: 'number', label: 'Fifth'},
-    ],
-
-    rows: [[0, 0, 0], [200, 5000, 6800]],
-  }
+export function toData(drivetrain) {
+  return drivetrain.gearRatios.map((gearRatio, index) => {
+    let speed = Calculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
+    return [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
+  });
 }
