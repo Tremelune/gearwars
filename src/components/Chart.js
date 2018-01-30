@@ -3,17 +3,22 @@ import {LineChart} from 'react-easy-chart';
 import * as ChartWrangler from '../biz/ChartDataWrangler.js';
 
 class Chart extends Component {
-  constructor() {
+  /**
+   * todo Drivetrain should probably be a class...immutable...
+   *
+   * props: {
+   *   drivetrain: {
+   *     tireDiameter: 26, // Inches
+   *     finalDrive: 3.31,
+   *     gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
+   *     redline: 6800,
+   *   }
+   * }
+   */
+  constructor(props) {
     super();
 
-    const drivetrain = {
-      tireDiameter: 26, // Inches
-      finalDrive: 3.31,
-      gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-      redline: 6800,
-    };
-
-    this.state = ChartWrangler.toData(drivetrain);
+    this.state = ChartWrangler.toData(props.drivetrain);
   }
 
   render() {
