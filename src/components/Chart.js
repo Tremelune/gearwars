@@ -17,24 +17,24 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
-
-    this.state = ChartWrangler.toData(props.drivetrain);
   }
 
+
   render() {
+    let data = ChartWrangler.toData(this.props.drivetrain);
     return (
       <div className={'chart'}>
-      <LineChart
-        grid
-        verticalGrid
-        axes
-        axisLabels={{x: 'mph', y: 'rpm'}}
-        width={1000}
-        height={500}
-        xTicks={20}
-        yTicks={5}
-        lineColors={['red', 'blue', 'black', 'green', 'orange', 'pink', 'cyan', 'purple', 'yellow', 'gray']}
-        data={this.state}
+        <LineChart
+          grid
+          verticalGrid
+          axes
+          axisLabels={{x: 'mph', y: 'rpm'}}
+          width={1000}
+          height={500}
+          xTicks={20}
+          yTicks={5}
+          lineColors={['red', 'blue', 'black', 'green', 'orange', 'pink', 'cyan', 'purple', 'yellow', 'gray']}
+          data={data}
         />
       </div>
     );
