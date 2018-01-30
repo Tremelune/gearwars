@@ -27,6 +27,7 @@ class Form extends Component {
     console.log('State:');
     console.log(this.state);
     event.preventDefault();
+    this.props.toggle();
   }
 
 
@@ -44,7 +45,7 @@ class Form extends Component {
         <div>Ninth: <input name="ninth" type="text" value={this.state.ninth} onChange={this.handleInputChange} /></div>
         <div>Tenth: <input name="tenth" type="text" value={this.state.tenth} onChange={this.handleInputChange} /></div>
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Toggle" />
       </form>
     );
   }
