@@ -9,7 +9,6 @@ class Form extends Component {
     this.state = Converter.paramsFromDrivetrain(props.drivetrain); // Prepopulate form with values.
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -18,19 +17,18 @@ class Form extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    // setState isn't immediate, so throw a callback in to update the chart when ready.
+    let updateChart = () => {
+      console.log('Input change state:', this.state);
+      let drivetrain = Converter.paramsToDrivetrain(this.state);
+      console.log('Input change drivetrain:', drivetrain);
+      this.props.update(drivetrain);
+    }
 
-    console.log('Input change state:', this.state);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log('Submit state:', this.state);
-    let drivetrain = Converter.paramsToDrivetrain(this.state);
-    console.log('Submit drivetrain:', drivetrain);
-    this.props.submit(drivetrain);
+    this.setState(
+      {[name]: value},
+      updateChart
+    );
   }
 
 
@@ -46,16 +44,15 @@ class Form extends Component {
         </div>
         <div>Redline: <input name="redline" type="text" value={this.state.redline} onChange={onChange} /></div>
         <br />
-        
+
         {/* todo Make number of gears mutable. Some cars have like TEN... */}
+        <div>Gear Ratios</div>
         <div>First: <input name="gear0" type="text" value={this.state.gear0} onChange={onChange} /></div>
         <div>Second: <input name="gear1" type="text" value={this.state.gear1} onChange={onChange} /></div>
         <div>Third: <input name="gear2" type="text" value={this.state.gear2} onChange={onChange} /></div>
         <div>Fourth: <input name="gear3" type="text" value={this.state.gear3} onChange={onChange} /></div>
         <div>Fifth: <input name="gear4" type="text" value={this.state.gear4} onChange={onChange} /></div>
         <div>Sixth: <input name="gear5" type="text" value={this.state.gear5} onChange={onChange} /></div>
-
-        <input type="submit" value="Submit" />
       </form>
     );
   }

@@ -29,7 +29,7 @@ class App extends Component {
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
         <Chart drivetrain={this.state} />
-        <Form drivetrain={this.state} submit={this.setDrivetrain} />
+        <Form drivetrain={this.state} update={this.setDrivetrain} />
       </div>
     );
   }
