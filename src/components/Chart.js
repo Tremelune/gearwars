@@ -30,7 +30,7 @@ class Chart extends Component {
           verticalGrid
           axes
           axisLabels={{x: 'mph', y: 'rpm'}}
-          width={1000}
+          width={800}
           height={500}
           xTicks={20}
           yTicks={10}

@@ -7,7 +7,7 @@ class App extends Component {
   constructor() {
     super();
 
-    // Something to fill the form in with initially.
+    // Something to fill the form in with initially (happens to be a 2015 EcoBoost Ford Mustang).
     this.state = {
       tireDiameter: 26, // Inches
       finalDrive: 3.31,
@@ -19,8 +19,6 @@ class App extends Component {
 
   // Sneaky syntax allows for 'this' to be accessible.
   setDrivetrain = (drivetrain) => {
-    console.log('Setting: ');
-    console.log(drivetrain);
     this.setState(drivetrain);
   }
 
@@ -28,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header"><h1 className="App-title">Ho boy, I envy <i>you!</i></h1></header>
+        <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
         <Chart drivetrain={this.state} />
         <Form drivetrain={this.state} submit={this.setDrivetrain} />

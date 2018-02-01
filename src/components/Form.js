@@ -45,17 +45,15 @@ class Form extends Component {
           Final Drive: <input name="finalDrive" type="text" value={this.state.finalDrive} onChange={onChange} />
         </div>
         <div>Redline: <input name="redline" type="text" value={this.state.redline} onChange={onChange} /></div>
-
+        <br />
+        
+        {/* todo Make number of gears mutable. Some cars have like TEN... */}
         <div>First: <input name="gear0" type="text" value={this.state.gear0} onChange={onChange} /></div>
         <div>Second: <input name="gear1" type="text" value={this.state.gear1} onChange={onChange} /></div>
         <div>Third: <input name="gear2" type="text" value={this.state.gear2} onChange={onChange} /></div>
         <div>Fourth: <input name="gear3" type="text" value={this.state.gear3} onChange={onChange} /></div>
         <div>Fifth: <input name="gear4" type="text" value={this.state.gear4} onChange={onChange} /></div>
         <div>Sixth: <input name="gear5" type="text" value={this.state.gear5} onChange={onChange} /></div>
-        <div>Seventh: <input name="gear6" type="text" value={this.state.gear6} onChange={onChange} /></div>
-        <div>Eight: <input name="gear7" type="text" value={this.state.gear7} onChange={onChange} /></div>
-        <div>Ninth: <input name="gear8" type="text" value={this.state.gear8} onChange={onChange} /></div>
-        <div>Tenth: <input name="gear9" type="text" value={this.state.gear9} onChange={onChange} /></div>
 
         <input type="submit" value="Submit" />
       </form>
