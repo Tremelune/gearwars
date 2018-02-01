@@ -18,6 +18,9 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
+
+    // A sort of slate blue gradient...
+    this.state = {lineColors: ['#21233b', '#4e5761', '#7b8b87', '#91a59a', '#a8bfad', '#bfd9c1']}
   }
 
 
@@ -34,7 +37,7 @@ class Chart extends Component {
           height={500}
           xTicks={20}
           yTicks={10}
-          lineColors={['red', 'blue', 'black', 'green', 'orange', 'pink', 'cyan', 'purple', 'yellow', 'gray']}
+          lineColors={this.state.lineColors}
           xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
           yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
           data={data}
