@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import * as ChartWrangler from '../biz/ChartDataWrangler.js';
 
+/** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
 class Chart extends Component {
   /**
    * todo Drivetrain should probably be a class...immutable...
@@ -32,8 +33,10 @@ class Chart extends Component {
           width={1000}
           height={500}
           xTicks={20}
-          yTicks={5}
+          yTicks={10}
           lineColors={['red', 'blue', 'black', 'green', 'orange', 'pink', 'cyan', 'purple', 'yellow', 'gray']}
+          xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
+          yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
           data={data}
         />
       </div>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
+import * as Converter from '../biz/FormConverter.js';
 
 class Form extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {}; // Avoid null, 'cause we gotta append shit in the form.
+    this.state = Converter.paramsFromDrivetrain(props.drivetrain); // Prepopulate form with values.
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,32 +21,43 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
+
+    console.log('Input change state:', this.state);
   }
 
   handleSubmit(event) {
-    console.log('State:');
-    console.log(this.state);
     event.preventDefault();
-    this.props.toggle();
+    console.log('Submit state:', this.state);
+    let drivetrain = Converter.paramsToDrivetrain(this.state);
+    console.log('Submit drivetrain:', drivetrain);
+    this.props.submit(drivetrain);
   }
 
 
   render() {
+    let onChange = this.handleInputChange;
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>First: <input name="first" type="text" value={this.state.first} onChange={this.handleInputChange} /></div>
-        <div>Second: <input name="second" type="text" value={this.state.second} onChange={this.handleInputChange} /></div>
-        <div>Third: <input name="third" type="text" value={this.state.third} onChange={this.handleInputChange} /></div>
-        <div>Fourth: <input name="fourth" type="text" value={this.state.fourth} onChange={this.handleInputChange} /></div>
-        <div>Fifth: <input name="fifth" type="text" value={this.state.fifth} onChange={this.handleInputChange} /></div>
-        <div>Sixth: <input name="sixth" type="text" value={this.state.sixth} onChange={this.handleInputChange} /></div>
-        <div>Seventh: <input name="seventh" type="text" value={this.state.seventh} onChange={this.handleInputChange} /></div>
-        <div>Eight: <input name="eight" type="text" value={this.state.eight} onChange={this.handleInputChange} /></div>
-        <div>Ninth: <input name="ninth" type="text" value={this.state.ninth} onChange={this.handleInputChange} /></div>
-        <div>Tenth: <input name="tenth" type="text" value={this.state.tenth} onChange={this.handleInputChange} /></div>
+        <div>
+          Tire Diameter: <input name="tireDiameter" type="text" value={this.state.tireDiameter} onChange={onChange} />
+        </div>
+        <div>
+          Final Drive: <input name="finalDrive" type="text" value={this.state.finalDrive} onChange={onChange} />
+        </div>
+        <div>Redline: <input name="redline" type="text" value={this.state.redline} onChange={onChange} /></div>
 
-        <input type="submit" value="Toggle" />
+        <div>First: <input name="gear0" type="text" value={this.state.gear0} onChange={onChange} /></div>
+        <div>Second: <input name="gear1" type="text" value={this.state.gear1} onChange={onChange} /></div>
+        <div>Third: <input name="gear2" type="text" value={this.state.gear2} onChange={onChange} /></div>
+        <div>Fourth: <input name="gear3" type="text" value={this.state.gear3} onChange={onChange} /></div>
+        <div>Fifth: <input name="gear4" type="text" value={this.state.gear4} onChange={onChange} /></div>
+        <div>Sixth: <input name="gear5" type="text" value={this.state.gear5} onChange={onChange} /></div>
+        <div>Seventh: <input name="gear6" type="text" value={this.state.gear6} onChange={onChange} /></div>
+        <div>Eight: <input name="gear7" type="text" value={this.state.gear7} onChange={onChange} /></div>
+        <div>Ninth: <input name="gear8" type="text" value={this.state.gear8} onChange={onChange} /></div>
+        <div>Tenth: <input name="gear9" type="text" value={this.state.gear9} onChange={onChange} /></div>
+
+        <input type="submit" value="Submit" />
       </form>
     );
   }
