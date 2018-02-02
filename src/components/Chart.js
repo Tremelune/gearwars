@@ -27,7 +27,7 @@ class Chart extends Component {
   render() {
     let data = ChartWrangler.toData(this.props.drivetrain);
     return (
-      <div className={'chart'}>
+      <div className={'Chart'}>
         <LineChart
           grid
           verticalGrid
