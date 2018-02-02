@@ -34,6 +34,7 @@ class Form extends Component {
 
   render() {
     let onChange = this.handleInputChange;
+    // todo Validate sane values.
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
