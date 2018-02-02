@@ -1,6 +1,6 @@
 {
   "name": "gearwars",
-  "homepage": "https://tremelune.github.io/gearwars/",
+  "homepage": "https://gearwars.net/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
