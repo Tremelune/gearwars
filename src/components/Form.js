@@ -12,26 +12,6 @@ class Form extends Component {
   }
 
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    // setState isn't immediate, so throw a callback in to update the chart when ready.
-    let updateChart = () => {
-      console.log('Input change state:', this.state);
-      let drivetrain = Converter.paramsToDrivetrain(this.state);
-      console.log('Input change drivetrain:', drivetrain);
-      this.props.update(this.props.id, drivetrain);
-    }
-
-    this.setState(
-      {[name]: value},
-      updateChart
-    );
-  }
-
-
   render() {
     let onChange = this.handleInputChange;
     // todo Validate sane values.
@@ -55,6 +35,25 @@ class Form extends Component {
         <div>Sixth: <input name="gear5" type="number" value={this.state.gear5} onChange={onChange} /></div>
         <div>Seventh: <input name="gear6" type="number" value={this.state.gear6} onChange={onChange} /></div>
       </form>
+    );
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    // setState isn't immediate, so throw a callback in to update the chart when ready.
+    let updateChart = () => {
+      console.log('Input change state:', this.state);
+      let drivetrain = Converter.paramsToDrivetrain(this.state);
+      console.log('Input change drivetrain:', drivetrain);
+      this.props.update(this.props.id, drivetrain);
+    }
+
+    this.setState(
+      {[name]: value},
+      updateChart
     );
   }
 }
