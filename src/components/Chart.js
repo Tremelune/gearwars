@@ -23,23 +23,27 @@ class Chart extends Component {
   constructor(props) {
     super();
 
+    // todo Pull out function.
     let drivetrainA = LineColoration.generateGradient(0, 6);
     let drivetrainB = LineColoration.generateGradient(1, 7);
     let lineColors = [...drivetrainA, ...drivetrainB];
 
     // A sort of slate blue gradient...
     this.state = {lineColors: lineColors};
+
+    // todo Pull out function.
+    let combinedData = [];
+    props.drivetrains.map((drivetrain, index) => {
+      let data = ChartWrangler.toData(drivetrain);
+      combinedData = [...combinedData, ...data];
+    })
+    this.state.data = combinedData;
+
+    console.log('Data:', this.state.data);
   }
 
 
   render() {
-    let combinedData = [];
-
-    this.props.drivetrains.map((drivetrain, index) => {
-      let data = ChartWrangler.toData(drivetrain);
-      combinedData = [...combinedData, ...data];
-    })
-
     return (
       <div className={'Chart'}>
         <LineChart
@@ -54,7 +58,7 @@ class Chart extends Component {
           lineColors={this.state.lineColors}
           xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
           yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
-          data={combinedData}
+          data={this.state.data}
         />
       </div>
     );
