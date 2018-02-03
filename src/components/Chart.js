@@ -23,14 +23,14 @@ class Chart extends Component {
   constructor(props) {
     super();
 
-    this.state = {
-      lineColors: this.generateLineColors(props),
-      data: this.buildDataFromDrivetrains(props),
-    };
+    this.state = {lineColors: this.generateLineColors(props)};
   }
 
 
   render() {
+    // For reasons I don't udnerstand, putting this in the constructor prevents the chart from re-drawing the lines
+    // as the forms are updated. It bothers me.
+    let data = this.buildDataFromDrivetrains(this.props)
     return (
       <div className={'Chart'}>
         <LineChart
@@ -45,7 +45,7 @@ class Chart extends Component {
           lineColors={this.state.lineColors}
           xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
           yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
-          data={this.state.data}
+          data={data}
         />
       </div>
     );
