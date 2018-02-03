@@ -18,20 +18,11 @@ class App extends Component {
     let compass = {
       tireDiameter: 29, // Inches
       finalDrive: 3.5,
-      gearRatios: [4.46, 2.51, 1.56, 1.56, 1.14, 0.85, 0.67],
+      gearRatios: [4.46, 2.51, 1.56, 1.35, 1.14, 0.85, 0.67],
       redline: 6400,
     };
 
     this.state = {drivetrains: [mustang, compass]};
-  }
-
-
-  // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrain = (formId, drivetrain) => {
-    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.drivetrains;
-    drivetrains[formId] = drivetrain;
-    this.setState({drivetrains: drivetrains});
   }
 
 
@@ -53,6 +44,15 @@ class App extends Component {
         <img src={"/revolio.png"} />
       </div>
     );
+  }
+
+
+  // Sneaky syntax allows for 'this' to be accessible.
+  setDrivetrain = (formId, drivetrain) => {
+    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
+    let drivetrains = this.state.drivetrains;
+    drivetrains[formId] = drivetrain;
+    this.setState({drivetrains: drivetrains});
   }
 }
 
