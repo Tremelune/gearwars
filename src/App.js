@@ -22,7 +22,7 @@ class App extends Component {
       redline: 6400,
     };
 
-    this.state = [mustang, compass];
+    this.state = {drivetrains: [mustang, compass]};
   }
 
 
@@ -37,7 +37,7 @@ class App extends Component {
     };
 
     let drivetrains = [mustang, drivetrain];
-    this.setState({drivetrains);
+    this.setState({drivetrains: drivetrains});
   }
 
 
@@ -46,8 +46,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
-        <Chart drivetrains={this.state} />
-        <Form drivetrain={this.state[1]} update={this.setDrivetrain} />
+        <Chart drivetrains={this.state.drivetrains} />
+        <Form drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
 
         <img src={"/revolio.png"} />
       </div>
