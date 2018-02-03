@@ -8,18 +8,30 @@ class App extends Component {
     super();
 
     // Something to fill the form in with initially (happens to be a 2015 EcoBoost Ford Mustang).
-    this.state = {
+    let mustang = {
       tireDiameter: 26, // Inches
       finalDrive: 3.31,
       gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
       redline: 6800,
     };
+
+    let compass = {
+      tireDiameter: 29, // Inches
+      finalDrive: 3.5,
+      gearRatios: [4.46, 2.51, 1.56, 1.56, 1.14, 0.85, 0.67],
+      redline: 6400,
+    };
+
+    this.state = {drivetrains: [mustang, compass]};
   }
 
 
   // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrain = (drivetrain) => {
-    this.setState(drivetrain);
+  setDrivetrain = (formId, drivetrain) => {
+    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
+    let drivetrains = this.state.drivetrains;
+    drivetrains[formId] = drivetrain;
+    this.setState({drivetrains: drivetrains});
   }
 
 
@@ -28,8 +40,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
-        <Chart drivetrain={this.state} />
-        <Form drivetrain={this.state} update={this.setDrivetrain} />
+        <Chart drivetrains={this.state.drivetrains} />
+
+        <div><b>Drivetrain 1</b></div>
+        <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
+        <br />
+
+        <div><b>Drivetrain 2</b></div>
+        <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
+        <br />
 
         <img src={"/revolio.png"} />
       </div>

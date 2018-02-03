@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import * as ChartWrangler from '../biz/ChartDataWrangler.js';
+import * as LineColoration from '../biz/LineColoration.js';
 
 /** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
 class Chart extends Component {
@@ -19,13 +20,23 @@ class Chart extends Component {
   constructor(props) {
     super();
 
+    let drivetrainA = LineColoration.generateGradient(0, 6);
+    let drivetrainB = LineColoration.generateGradient(1, 7);
+    let lineColors = [...drivetrainA, ...drivetrainB];
+
     // A sort of slate blue gradient...
-    this.state = {lineColors: ['#21233b', '#4e5761', '#7b8b87', '#91a59a', '#a8bfad', '#bfd9c1']}
+    this.state = {lineColors: lineColors};
   }
 
 
   render() {
-    let data = ChartWrangler.toData(this.props.drivetrain);
+    let combinedData = [];
+
+    this.props.drivetrains.map((drivetrain, index) => {
+      let data = ChartWrangler.toData(drivetrain);
+      combinedData = [...combinedData, ...data];
+    })
+
     return (
       <div className={'Chart'}>
         <LineChart
@@ -40,7 +51,7 @@ class Chart extends Component {
           lineColors={this.state.lineColors}
           xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
           yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
-          data={data}
+          data={combinedData}
         />
       </div>
     );
