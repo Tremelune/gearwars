@@ -42,11 +42,11 @@ class App extends Component {
 
         <Chart drivetrains={this.state.drivetrains} />
 
-        <div><b>Form 1</b></div>
+        <div><b>Drivetrain 1</b></div>
         <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
         <br />
 
-        <div><b>Form 2</b></div>
+        <div><b>Drivetrain 2</b></div>
         <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
         <br />
 
