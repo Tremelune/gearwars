@@ -27,16 +27,10 @@ class App extends Component {
 
 
   // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrain = (drivetrain) => {
-    // Until we can clone forms, just always throw a hardcoded Mustang in there...
-    let mustang = {
-      tireDiameter: 26, // Inches
-      finalDrive: 3.31,
-      gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-      redline: 6800,
-    };
-
-    let drivetrains = [mustang, drivetrain];
+  setDrivetrain = (formId, drivetrain) => {
+    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
+    let drivetrains = this.state.drivetrains;
+    drivetrains[formId] = drivetrain;
     this.setState({drivetrains: drivetrains});
   }
 
@@ -47,7 +41,10 @@ class App extends Component {
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
         <Chart drivetrains={this.state.drivetrains} />
-        <Form drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
+        <div>Form 1</div>
+        <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
+        <div>Form 2</div>
+        <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
 
         <img src={"/revolio.png"} />
       </div>

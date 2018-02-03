@@ -22,7 +22,7 @@ class Form extends Component {
       console.log('Input change state:', this.state);
       let drivetrain = Converter.paramsToDrivetrain(this.state);
       console.log('Input change drivetrain:', drivetrain);
-      this.props.update(drivetrain);
+      this.props.update(this.props.id, drivetrain);
     }
 
     this.setState(
