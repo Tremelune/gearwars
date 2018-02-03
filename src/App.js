@@ -30,6 +30,8 @@ class App extends Component {
 
         <Chart drivetrain={this.state} />
         <Form drivetrain={this.state} update={this.setDrivetrain} />
+
+        <img src={"/revolio.png"} />
       </div>
     );
   }
