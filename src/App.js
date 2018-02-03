@@ -41,10 +41,14 @@ class App extends Component {
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
         <Chart drivetrains={this.state.drivetrains} />
-        <div>Form 1</div>
+
+        <div><b>Form 1</b></div>
         <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
-        <div>Form 2</div>
+        <br />
+
+        <div><b>Form 2</b></div>
         <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
+        <br />
 
         <img src={"/revolio.png"} />
       </div>

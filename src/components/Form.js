@@ -44,7 +44,6 @@ class Form extends Component {
           Final Drive: <input name="finalDrive" type="number" value={this.state.finalDrive} onChange={onChange} />
         </div>
         <div>Redline: <input name="redline" type="number" value={this.state.redline} onChange={onChange} /></div>
-        <br />
 
         {/* todo Make number of gears mutable. Some cars have like TEN... */}
         <div>Gear Ratios</div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import * as ChartWrangler from '../biz/ChartDataWrangler.js';
+import * as LineColoration from '../biz/LineColoration.js';
 
 /** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
 class Chart extends Component {
@@ -19,8 +20,12 @@ class Chart extends Component {
   constructor(props) {
     super();
 
+    let drivetrainA = LineColoration.generateGradient(0, 6);
+    let drivetrainB = LineColoration.generateGradient(1, 7);
+    let lineColors = [...drivetrainA, ...drivetrainB];
+
     // A sort of slate blue gradient...
-    this.state = {lineColors: ['#21233b', '#4e5761', '#7b8b87', '#91a59a', '#a8bfad', '#bfd9c1', 'red', 'blue', 'orange', 'green', 'yellow', 'gray']}
+    this.state = {lineColors: lineColors};
   }
 
 
