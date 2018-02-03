@@ -30,16 +30,7 @@ class Chart extends Component {
 
     // A sort of slate blue gradient...
     this.state = {lineColors: lineColors};
-
-    // todo Pull out function.
-    let combinedData = [];
-    props.drivetrains.map((drivetrain, index) => {
-      let data = ChartWrangler.toData(drivetrain);
-      combinedData = [...combinedData, ...data];
-    })
-    this.state.data = combinedData;
-
-    console.log('Data:', this.state.data);
+    this.state.data = this.buildDataFromDrivetrains(props);
   }
 
 
@@ -62,6 +53,17 @@ class Chart extends Component {
         />
       </div>
     );
+  }
+
+
+  /** Converts drivetrains to chart data, and combines them ina single array. */
+  buildDataFromDrivetrains(props) {
+    let combinedData = [];
+    props.drivetrains.map((drivetrain, index) => {
+      let data = ChartWrangler.toData(drivetrain);
+      combinedData = [...combinedData, ...data];
+    })
+    return combinedData;
   }
 }
 
