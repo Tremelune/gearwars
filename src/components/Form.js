@@ -53,6 +53,7 @@ class Form extends Component {
         <div>Fourth: <input name="gear3" type="number" value={this.state.gear3} onChange={onChange} /></div>
         <div>Fifth: <input name="gear4" type="number" value={this.state.gear4} onChange={onChange} /></div>
         <div>Sixth: <input name="gear5" type="number" value={this.state.gear5} onChange={onChange} /></div>
+        <div>Seventh: <input name="gear6" type="number" value={this.state.gear6} onChange={onChange} /></div>
       </form>
     );
   }

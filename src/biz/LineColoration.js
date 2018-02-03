@@ -14,9 +14,9 @@
 export function generateGradient(index, count) {
   // This should be a class-level constant...
   const gradientRanges = [
-    {first: '#ff0000', last: 'fff0f0'},
-    {first: '#0000ff', last: 'f0f0ff'},
-    {first: '#00ff00', last: 'f0fff0'},
+    {first: '#ff0000', last: 'ffcccc'},
+    {first: '#0000ff', last: 'ccccff'},
+    {first: '#00ff00', last: 'ccffcc'},
   ];
 
   let gradientRange = gradientRanges[index];
@@ -24,7 +24,7 @@ export function generateGradient(index, count) {
   let Rainbow = require('rainbowvis.js'); // Constant??
   let rainbow = new Rainbow();
   rainbow.setSpectrum(gradientRange.first, gradientRange.last);
-  rainbow.setNumberRange(0, count);
+  rainbow.setNumberRange(0, count - 1);
 
   let colors = [];
   for(let i=0; i<count; i++) {

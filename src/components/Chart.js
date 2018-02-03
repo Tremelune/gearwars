@@ -8,13 +8,16 @@ class Chart extends Component {
   /**
    * todo Drivetrain should probably be a class...immutable...
    *
-   * props: {
-   *   drivetrain: {
-   *     tireDiameter: 26, // Inches
-   *     finalDrive: 3.31,
-   *     gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-   *     redline: 6800,
-   *   }
+   * @props An array of at least one drivetrains:
+   * {
+   *   [
+   *     drivetrain: {
+   *       tireDiameter: 26, // Inches
+   *       finalDrive: 3.31,
+   *       gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
+   *       redline: 6800,
+   *     },
+   *   ]
    * }
    */
   constructor(props) {
