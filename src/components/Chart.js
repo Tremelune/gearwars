@@ -54,13 +54,16 @@ class Chart extends Component {
 
   /** Generates line colors. One gradient per drivetrain. One color per gear. */
   generateLineColors(props) {
-    // todo Pull numbers from props...
-    let drivetrainA = LineColoration.generateGradient(0, 6);
-    let drivetrainB = LineColoration.generateGradient(1, 7);
-    return [...drivetrainA, ...drivetrainB];
+    let gradients = [];
+    props.drivetrains.map((drivetrain, index) => {
+      let count = drivetrain.gearRatios.length;
+      let gradient = LineColoration.generateGradient(index, count)
+      gradients = [...gradients, ...gradient];
+    })
+    return gradients;
   }
 
-  /** Converts drivetrains to chart data, and combines them ina single array. */
+  /** Converts drivetrains to chart data, and combines them in a single array. */
   buildDataFromDrivetrains(props) {
     let combinedData = [];
     props.drivetrains.map((drivetrain, index) => {
