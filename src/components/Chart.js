@@ -23,14 +23,10 @@ class Chart extends Component {
   constructor(props) {
     super();
 
-    // todo Pull out function.
-    let drivetrainA = LineColoration.generateGradient(0, 6);
-    let drivetrainB = LineColoration.generateGradient(1, 7);
-    let lineColors = [...drivetrainA, ...drivetrainB];
-
-    // A sort of slate blue gradient...
-    this.state = {lineColors: lineColors};
-    this.state.data = this.buildDataFromDrivetrains(props);
+    this.state = {
+      lineColors: this.generateLineColors(props),
+      data: this.buildDataFromDrivetrains(props),
+    };
   }
 
 
@@ -55,6 +51,14 @@ class Chart extends Component {
     );
   }
 
+
+  /** Generates line colors. One gradient per drivetrain. One color per gear. */
+  generateLineColors(props) {
+    // todo Pull numbers from props...
+    let drivetrainA = LineColoration.generateGradient(0, 6);
+    let drivetrainB = LineColoration.generateGradient(1, 7);
+    return [...drivetrainA, ...drivetrainB];
+  }
 
   /** Converts drivetrains to chart data, and combines them ina single array. */
   buildDataFromDrivetrains(props) {
