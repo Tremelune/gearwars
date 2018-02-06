@@ -54,21 +54,25 @@ class Chart extends Component {
 
   /** Generates line colors. One gradient per drivetrain. One color per gear. */
   generateLineColors(props) {
+    // This seems a bit weird, but I didn't know how to append in a map().
     let gradients = [];
     props.drivetrains.map((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
       let gradient = LineColoration.generateGradient(index, count)
       gradients = [...gradients, ...gradient];
+      return null;
     })
     return gradients;
   }
 
   /** Converts drivetrains to chart data, and combines them in a single array. */
   buildDataFromDrivetrains(props) {
+    // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
     props.drivetrains.map((drivetrain, index) => {
       let data = ChartWrangler.toData(drivetrain);
       combinedData = [...combinedData, ...data];
+      return null;
     })
     return combinedData;
   }
