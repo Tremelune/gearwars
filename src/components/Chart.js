@@ -32,22 +32,20 @@ class Chart extends Component {
     // as the forms are updated. It bothers me.
     let data = this.buildDataFromDrivetrains(this.props)
     return (
-      <div className={'Chart'}>
-        <LineChart
-          grid
-          verticalGrid
-          axes
-          axisLabels={{x: 'mph', y: 'rpm'}}
-          width={800}
-          height={500}
-          xTicks={20}
-          yTicks={10}
-          lineColors={this.state.lineColors}
-          xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
-          yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
-          data={data}
-        />
-      </div>
+      <LineChart
+        grid
+        verticalGrid
+        axes
+        axisLabels={{x: 'mph', y: 'rpm'}}
+        width={800}
+        height={500}
+        xTicks={20}
+        yTicks={10}
+        lineColors={this.state.lineColors}
+        xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
+        yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
+        data={data}
+      />
     );
   }
 

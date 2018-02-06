@@ -17,11 +17,12 @@
   font-size: large;
 }
 
-.Chart {
-  float: right;
+.input {
+  width: 30%;
+  float: left;
 }
 
-.Form {
-  padding: 10px;
-  float: left;
+.output {
+  width: 70%;
+  float: right;
 }

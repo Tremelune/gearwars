@@ -7,7 +7,7 @@ class TireForm extends Component {
   constructor(props) {
     super(props);
 
-    let size = '235/45-17'; // props
+    let size = '235/50-18'; // props
     let tire = Converter.parseTire(size);
     console.log("tire:", tire);
     let diameter = Calculator.diameter(tire);
@@ -21,15 +21,12 @@ class TireForm extends Component {
   render() {
     return (
       <div>
-        <form classname={'Form'}>
-          <div>
-            Tire size (example: 235/45-17):
+        <form>
+            Tire size:
             <input name="size" type="text" value={this.state.size} onChange={this.handleInputChange} />
-
-          </div>
         </form>
 
-        <div>Diameter: {this.state.diameter}</div>
+        Diameter: {this.state.diameter}
       </div>
     );
   }

@@ -10,7 +10,7 @@ class App extends Component {
 
     // Something to fill the form in with initially (happens to be a 2015 EcoBoost Ford Mustang).
     let mustang = {
-      tireDiameter: 26, // Inches
+      tireDiameter: 27.3, // Inches
       finalDrive: 3.31,
       gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
       redline: 6800,
@@ -32,19 +32,22 @@ class App extends Component {
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
-        <Chart drivetrains={this.state.drivetrains} />
+        <div className="input">
+          <TireForm />
+          <br />
 
-        <div><b>Drivetrain 1</b></div>
-        <TireForm />
-        <br />
-        <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
-        <br />
+          <div><b>Drivetrain 1</b></div>
+          <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
+          <br />
 
-        <div><b>Drivetrain 2</b></div>
-        <TireForm />
-        <br />
-        <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
-        <br />
+          <div><b>Drivetrain 2</b></div>
+          <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
+          <br />
+        </div>
+
+        <div className="output">
+          <Chart drivetrains={this.state.drivetrains} />
+        </div>
 
         <img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
