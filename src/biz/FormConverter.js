@@ -48,3 +48,19 @@ export function paramsToDrivetrain(params) {
 
   return drivetrain;
 }
+
+/**
+ * Converts tire size ("235/40-17") to a tire object.
+ */
+export function parseTire(size) {
+  let sizes = size.split("/");
+  let width = sizes[0];
+  sizes = sizes[1].split('-');
+  let aspectRatio = sizes[0];
+  let wheelDiameter = sizes[1];
+  return {
+    width: parseInt(width),
+    aspectRatio: parseInt(aspectRatio),
+    wheelDiameter: parseInt(wheelDiameter),
+  }
+}
