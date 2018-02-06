@@ -45,9 +45,7 @@ class Form extends Component {
 
     // setState isn't immediate, so throw a callback in to update the chart when ready.
     let updateChart = () => {
-      console.log('Input change state:', this.state);
       let drivetrain = Converter.paramsToDrivetrain(this.state);
-      console.log('Input change drivetrain:', drivetrain);
       this.props.update(this.props.id, drivetrain);
     }
 
