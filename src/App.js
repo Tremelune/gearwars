@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Chart from './components/Chart.js';
 import Form from './components/Form.js';
+import TireForm from './components/TireForm.js';
 
 class App extends Component {
   constructor() {
@@ -34,10 +35,14 @@ class App extends Component {
         <Chart drivetrains={this.state.drivetrains} />
 
         <div><b>Drivetrain 1</b></div>
+        <TireForm />
+        <br />
         <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
         <br />
 
         <div><b>Drivetrain 2</b></div>
+        <TireForm />
+        <br />
         <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
         <br />
 
