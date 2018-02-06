@@ -41,7 +41,7 @@ class App extends Component {
         <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
         <br />
 
-        <img src={"/revolio.png"} />
+        <img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
     );
   }
