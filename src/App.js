@@ -36,13 +36,13 @@ class App extends Component {
           <TireForm />
           <br />
 
-          <div><b>Drivetrain 1</b></div>
-          <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
-          <br />
-
-          <div><b>Drivetrain 2</b></div>
-          <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
-          <br />
+          {this.state.drivetrains.map((drivetrain, index) =>
+            <div key={index}>
+              <div><b>Drivetrain {index}</b></div>
+              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+              <br />
+            </div>
+          )}
         </div>
 
         <div className="output">
