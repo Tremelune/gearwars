@@ -1,5 +1,6 @@
-a {
+.drivetrainTitle a {
     text-decoration: none;
+    color: gray;
 }
 
 .App {

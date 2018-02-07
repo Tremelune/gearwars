@@ -37,7 +37,7 @@ class App extends Component {
 
         {this.state.drivetrains.map((drivetrain, index) =>
           <div key={index}>
-            <div>
+            <div className="drivetrainTitle">
               <b>Drivetrain {index + 1}</b>
               <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
               <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
