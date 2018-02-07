@@ -24,6 +24,8 @@ class App extends Component {
 
 
   render() {
+    // Don't show the (Remove) button if there's only one listed drivetrain.
+    let removeButtonText = this.state.drivetrains.length > 1 ? "(Remove)" : "";
     return (
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
@@ -40,7 +42,7 @@ class App extends Component {
             <div className="drivetrainTitle">
               <b>Drivetrain {index + 1}</b>
               <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-              <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
+              <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
             </div>
 
             <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
