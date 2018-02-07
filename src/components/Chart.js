@@ -54,11 +54,9 @@ class Chart extends Component {
     props.drivetrains.map((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
       let gradient = LineColoration.generateGradient(index, count)
-      console.log("gradient " + index, gradient);
       gradients = [...gradients, ...gradient];
       return null;
     })
-    console.log("colors", gradients);
     return gradients;
   }
 
