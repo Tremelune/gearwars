@@ -42,8 +42,13 @@ class TireForm extends Component {
   }
 
   diameterFromSize(size) {
-    let tire = Converter.parseTire(size);
-    return Calculator.diameter(tire);
+    // If we can't parse/calculate a diameter, it's because of bad input. C'est cool.
+    try {
+      let tire = Converter.parseTire(size);
+      return Calculator.diameter(tire);
+    } catch(e) {
+      return 0;
+    }
   }
 }
 
