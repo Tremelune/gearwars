@@ -20,13 +20,3 @@ a:link {
 .App-intro {
   font-size: large;
 }
-
-.input {
-  width: 30%;
-  float: left;
-}
-
-.output {
-  width: 70%;
-  float: right;
-}

@@ -22,6 +22,14 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
+
+    let width = window.innerWidth;
+    let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
+
+    this.state = {
+      width: width,
+      height: height,
+    }
   }
 
 
@@ -34,8 +42,9 @@ class Chart extends Component {
         verticalGrid
         axes
         axisLabels={{x: 'mph', y: 'rpm'}}
-        width={800}
-        height={500}
+        width={this.state.width}
+        height={this.state.height}
+        margin={{top: 10, right: 10, bottom: 10, left: 40}}
         xTicks={20}
         yTicks={10}
         lineColors={lineColors}

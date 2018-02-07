@@ -48,7 +48,7 @@ class App extends Component {
           </div>
         )}
 
-        <img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>
+        {/*}<img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>*/}
       </div>
     );
   }
