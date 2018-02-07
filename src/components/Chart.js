@@ -49,6 +49,18 @@ class Chart extends Component {
     );
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    this.setState(this.calculateDimensions());
+  }
+
 
   /** Generates line colors. One gradient per drivetrain. One color per gear. */
   generateLineColors(props) {
