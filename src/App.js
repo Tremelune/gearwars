@@ -26,6 +26,7 @@ class App extends Component {
   render() {
     // Don't show the (Remove) button if there's only one listed drivetrain.
     let removeButtonText = this.state.drivetrains.length > 1 ? "(Remove)" : "";
+    let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
@@ -50,7 +51,7 @@ class App extends Component {
           </div>
         )}
 
-        {/*}<img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>*/}
+        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
     );
   }
