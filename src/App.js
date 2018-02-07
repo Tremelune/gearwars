@@ -24,33 +24,34 @@ class App extends Component {
 
 
   render() {
+    // Don't show the (Remove) button if there's only one listed drivetrain.
+    let removeButtonText = this.state.drivetrains.length > 1 ? "(Remove)" : "";
+    let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
-        <div className="input">
-          <TireForm tireSize={this.state.tireSize} />
-          <br />
-
-          {this.state.drivetrains.map((drivetrain, index) =>
-            <div key={index}>
-              <div>
-                <b>Drivetrain {index + 1}</b>
-                <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-                <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
-              </div>
-
-              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-              <br />
-            </div>
-          )}
-        </div>
-
-        <div className="output">
+        <div>
           <Chart drivetrains={this.state.drivetrains} />
         </div>
 
-        <img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>
+        <TireForm tireSize={this.state.tireSize} />
+        <br />
+
+        {this.state.drivetrains.map((drivetrain, index) =>
+          <div key={index}>
+            <div className="drivetrainTitle">
+              <b>Drivetrain {index + 1}</b>
+              <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+              <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
+            </div>
+
+            <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+            <br />
+          </div>
+        )}
+
+        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
     );
   }

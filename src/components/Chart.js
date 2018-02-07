@@ -22,6 +22,8 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
+
+    this.state = this.calculateDimensions();
   }
 
 
@@ -34,8 +36,9 @@ class Chart extends Component {
         verticalGrid
         axes
         axisLabels={{x: 'mph', y: 'rpm'}}
-        width={800}
-        height={500}
+        width={this.state.width}
+        height={this.state.height}
+        margin={{top: 10, right: 10, bottom: 30, left: 40}}
         xTicks={20}
         yTicks={10}
         lineColors={lineColors}
@@ -70,6 +73,22 @@ class Chart extends Component {
       return null;
     })
     return combinedData;
+  }
+
+  calculateDimensions() {
+    let width = window.innerWidth;
+    let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
+
+    let reasonableMaxHeight = window.innerHeight * 0.8;
+    if(height > reasonableMaxHeight) {
+      height = reasonableMaxHeight;
+      width = Math.round(height * 16 / 9);
+    }
+
+    return {
+      width: width,
+      height: height,
+    }
   }
 }
 
