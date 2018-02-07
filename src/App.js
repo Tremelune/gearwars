@@ -28,27 +28,25 @@ class App extends Component {
       <div className="App">
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
-        <div className="input">
-          <TireForm tireSize={this.state.tireSize} />
-          <br />
-
-          {this.state.drivetrains.map((drivetrain, index) =>
-            <div key={index}>
-              <div>
-                <b>Drivetrain {index + 1}</b>
-                <a href="" onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-                <a href="" onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
-              </div>
-
-              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-              <br />
-            </div>
-          )}
-        </div>
-
-        <div className="output">
+        <div>
           <Chart drivetrains={this.state.drivetrains} />
         </div>
+
+        <TireForm tireSize={this.state.tireSize} />
+        <br />
+
+        {this.state.drivetrains.map((drivetrain, index) =>
+          <div key={index}>
+            <div>
+              <b>Drivetrain {index + 1}</b>
+              <a href="" onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+              <a href="" onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
+            </div>
+
+            <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+            <br />
+          </div>
+        )}
 
         <img src={"/revolio.png"} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
