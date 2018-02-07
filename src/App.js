@@ -16,14 +16,7 @@ class App extends Component {
       redline: 6800,
     };
 
-    let compass = {
-      tireDiameter: 29, // Inches
-      finalDrive: 3.5,
-      gearRatios: [4.46, 2.51, 1.56, 1.35, 1.14, 0.85, 0.67],
-      redline: 6400,
-    };
-
-    this.state = {drivetrains: [mustang, compass]};
+    this.state = {drivetrains: [mustang]};
   }
 
 
@@ -36,13 +29,18 @@ class App extends Component {
           <TireForm />
           <br />
 
-          <div><b>Drivetrain 1</b></div>
-          <Form id="0" drivetrain={this.state.drivetrains[0]} update={this.setDrivetrain} />
-          <br />
+          {this.state.drivetrains.map((drivetrain, index) =>
+            <div key={index}>
+              <div>
+                <b>Drivetrain {index + 1}</b>
+                <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+                <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
+              </div>
 
-          <div><b>Drivetrain 2</b></div>
-          <Form id="1" drivetrain={this.state.drivetrains[1]} update={this.setDrivetrain} />
-          <br />
+              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+              <br />
+            </div>
+          )}
         </div>
 
         <div className="output">
@@ -55,10 +53,23 @@ class App extends Component {
   }
 
 
+  duplicateDrivetrain = (index) => {
+    let drivetrains = this.state.drivetrains.slice();
+    let drivetrain = drivetrains[index];
+    drivetrains.push(drivetrain);
+    this.setState({drivetrains: drivetrains});
+  }
+
+  removeDrivetrain = (index) => {
+    let drivetrains = this.state.drivetrains.slice();
+    drivetrains.splice(index, 1);
+    this.setState({drivetrains: drivetrains});
+  }
+
   // Sneaky syntax allows for 'this' to be accessible.
   setDrivetrain = (formId, drivetrain) => {
     // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.drivetrains;
+    let drivetrains = this.state.drivetrains.slice();
     drivetrains[formId] = drivetrain;
     this.setState({drivetrains: drivetrains});
   }
