@@ -23,7 +23,7 @@ class Chart extends Component {
   constructor(props) {
     super();
 
-    let width = window.innerWidth;
+    let width = window.innerWidth < 800 ? window.innerWidth : 800;
     let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
 
     this.state = {
@@ -44,7 +44,7 @@ class Chart extends Component {
         axisLabels={{x: 'mph', y: 'rpm'}}
         width={this.state.width}
         height={this.state.height}
-        margin={{top: 10, right: 10, bottom: 10, left: 40}}
+        margin={{top: 10, right: 10, bottom: 30, left: 40}}
         xTicks={20}
         yTicks={10}
         lineColors={lineColors}
