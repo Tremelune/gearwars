@@ -16,14 +16,7 @@ class App extends Component {
       redline: 6800,
     };
 
-    let compass = {
-      tireDiameter: 29, // Inches
-      finalDrive: 3.5,
-      gearRatios: [4.46, 2.51, 1.56, 1.35, 1.14, 0.85, 0.67],
-      redline: 6400,
-    };
-
-    this.state = {drivetrains: [mustang, compass]};
+    this.state = {drivetrains: [mustang]};
   }
 
 
@@ -38,7 +31,12 @@ class App extends Component {
 
           {this.state.drivetrains.map((drivetrain, index) =>
             <div key={index}>
-              <div><b>Drivetrain {index}</b></div>
+              <div>
+                <b>Drivetrain {index + 1}</b>
+                <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+                <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
+              </div>
+
               <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
               <br />
             </div>
@@ -54,6 +52,19 @@ class App extends Component {
     );
   }
 
+
+  duplicateDrivetrain = (index) => {
+    let drivetrains = this.state.drivetrains;
+    let drivetrain = this.state.drivetrains[index];
+    drivetrains.push(drivetrain);
+    this.setState({drivetrains: drivetrains});
+  }
+
+  removeDrivetrain = (index) => {
+    let drivetrains = this.state.drivetrains.slice();
+    drivetrains.splice(index, 1);
+    this.setState({drivetrains: drivetrains});
+  }
 
   // Sneaky syntax allows for 'this' to be accessible.
   setDrivetrain = (formId, drivetrain) => {
