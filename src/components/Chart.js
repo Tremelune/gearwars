@@ -23,13 +23,7 @@ class Chart extends Component {
   constructor(props) {
     super();
 
-    let width = window.innerWidth < 800 ? window.innerWidth : 800;
-    let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
-
-    this.state = {
-      width: width,
-      height: height,
-    }
+    this.state = this.calculateDimensions();
   }
 
 
@@ -79,6 +73,22 @@ class Chart extends Component {
       return null;
     })
     return combinedData;
+  }
+
+  calculateDimensions() {
+    let width = window.innerWidth;
+    let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
+
+    let reasonableMaxHeight = window.innerHeight * 0.8;
+    if(height > reasonableMaxHeight) {
+      height = reasonableMaxHeight;
+      width = Math.round(height * 16 / 9);
+    }
+
+    return {
+      width: width,
+      height: height,
+    }
   }
 }
 
