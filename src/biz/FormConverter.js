@@ -59,8 +59,8 @@ export function parseTire(size) {
   let aspectRatio = sizes[0];
   let wheelDiameter = sizes[1];
   return {
-    width: parseInt(width),
-    aspectRatio: parseInt(aspectRatio),
-    wheelDiameter: parseInt(wheelDiameter),
+    width: parseInt(width, 10),
+    aspectRatio: parseInt(aspectRatio, 10),
+    wheelDiameter: parseInt(wheelDiameter, 10),
   }
 }
