@@ -69,7 +69,7 @@ class App extends Component {
   // Sneaky syntax allows for 'this' to be accessible.
   setDrivetrain = (formId, drivetrain) => {
     // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.drivetrains;
+    let drivetrains = this.state.drivetrains.slice();
     drivetrains[formId] = drivetrain;
     this.setState({drivetrains: drivetrains});
   }
