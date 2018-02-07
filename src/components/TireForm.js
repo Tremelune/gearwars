@@ -4,15 +4,15 @@ import * as Calculator from '../biz/GearingCalculator.js';
 import * as Converter from '../biz/FormConverter.js';
 
 class TireForm extends Component {
+  /**
+   * @params props: Tire size, such as: {props: '235/45-17'};
+   */
   constructor(props) {
     super(props);
 
-    let size = '235/50-18'; // props
-    let tire = Converter.parseTire(size);
-    console.log("tire:", tire);
-    let diameter = Calculator.diameter(tire);
+    let diameter = this.diameterFromSize(props.tireSize);
 
-    this.state = {size: size, diameter: diameter} // Prepopulate form with values.
+    this.state = {size: props.tireSize, diameter: diameter} // Prepopulate form with values.
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -33,12 +33,17 @@ class TireForm extends Component {
 
   handleInputChange(event) {
     let target = event.target;
-    let diameter = Calculator.diameter(target.value);
+    let diameter = this.diameterFromSize(target.value)
 
     this.setState({
       size: target.value,
       diameter: diameter,
     });
+  }
+
+  diameterFromSize(size) {
+    let tire = Converter.parseTire(size);
+    return Calculator.diameter(tire);
   }
 }
 

@@ -16,7 +16,10 @@ class App extends Component {
       redline: 6800,
     };
 
-    this.state = {drivetrains: [mustang]};
+    this.state = {
+      tireSize: '235/50-18',
+      drivetrains: [mustang],
+    };
   }
 
 
@@ -26,7 +29,7 @@ class App extends Component {
         <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
 
         <div className="input">
-          <TireForm />
+          <TireForm tireSize={this.state.tireSize} />
           <br />
 
           {this.state.drivetrains.map((drivetrain, index) =>
