@@ -54,8 +54,8 @@ class App extends Component {
 
 
   duplicateDrivetrain = (index) => {
-    let drivetrains = this.state.drivetrains;
-    let drivetrain = this.state.drivetrains[index];
+    let drivetrains = this.state.drivetrains.slice();
+    let drivetrain = drivetrains[index];
     drivetrains.push(drivetrain);
     this.setState({drivetrains: drivetrains});
   }
