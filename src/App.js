@@ -29,7 +29,7 @@ class App extends Component {
     let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
-        <header className="App-header"><h1 className="App-title">Gear vs Speed</h1></header>
+        <header>Gear vs Speed</header>
 
         <div>
           <Chart drivetrains={this.state.drivetrains} />
