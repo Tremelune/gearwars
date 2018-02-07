@@ -36,8 +36,8 @@ class App extends Component {
             <div key={index}>
               <div>
                 <b>Drivetrain {index + 1}</b>
-                <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-                <a onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
+                <a href="" onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+                <a href="" onClick={(e) => this.removeDrivetrain(index)}>(Remove)</a>
               </div>
 
               <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
