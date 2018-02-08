@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
-import * as Converter from '../biz/FormConverter.js';
+import FormConverter from '../biz/FormConverter.js';
 
 class Form extends Component {
   constructor(props) {
     super(props);
 
-    this.state = Converter.paramsFromDrivetrain(props.drivetrain); // Prepopulate form with values.
+    this.state = FormConverter.paramsFromDrivetrain(props.drivetrain); // Prepopulate form with values.
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -48,7 +48,7 @@ class Form extends Component {
 
     // setState isn't immediate, so throw a callback in to update the chart when ready.
     let updateChart = () => {
-      let drivetrain = Converter.paramsToDrivetrain(this.state);
+      let drivetrain = FormConverter.paramsToDrivetrain(this.state);
       this.props.update(this.props.id, drivetrain);
     }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
+import FormConverter from '../biz/FormConverter.js';
 import * as Calculator from '../biz/GearingCalculator.js';
-import * as Converter from '../biz/FormConverter.js';
 
 class TireForm extends Component {
   /**
@@ -44,8 +44,8 @@ class TireForm extends Component {
   diameterFromSize(size) {
     // If we can't parse/calculate a diameter, it's because of bad input. C'est cool.
     try {
-      let tire = Converter.parseTire(size);
-      return Calculator.diameter(tire);
+      let tire = FormConverter.parseTire(size);
+      return FormConverter.diameter(tire);
     } catch(e) {
       return 0;
     }
