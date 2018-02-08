@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import * as Persister from '../biz/Persister.js';
 
 class Persistence extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
   render() {
     return (
       <div>
@@ -21,7 +16,7 @@ class Persistence extends Component {
   revert() {
     let drivetrains = Persister.load();
     if(drivetrains) {
-      this.props.setDrivetrains(drivetrains);      
+      this.props.setDrivetrains(drivetrains);
     }
   }
 }
