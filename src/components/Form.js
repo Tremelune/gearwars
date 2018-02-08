@@ -16,7 +16,10 @@ class Form extends Component {
     let onChange = this.handleInputChange;
     // todo Validate sane values.
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
+        <div>
+          Name: <input name="name" type="text" value={this.state.name} onChange={onChange} />
+        </div>
         <div>
           Tire Diameter: <input name="tireDiameter" type="number" value={this.state.tireDiameter} onChange={onChange} />
         </div>

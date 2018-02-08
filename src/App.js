@@ -14,6 +14,7 @@ class App extends Component {
     let drivetrains = Persister.load();
     if(!drivetrains) {
       drivetrains = [{
+        name: "Mustang",
         tireDiameter: 27.3, // Inches
         finalDrive: 3.31,
         gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],

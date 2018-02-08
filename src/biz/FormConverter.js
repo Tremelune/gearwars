@@ -11,6 +11,7 @@
  */
 export function paramsFromDrivetrain(drivetrain) {
   let params = {
+    name: drivetrain.name,
     tireDiameter: drivetrain.tireDiameter,
     finalDrive: drivetrain.finalDrive,
     redline: drivetrain.redline,
