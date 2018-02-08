@@ -3,6 +3,7 @@ import './App.css';
 import Chart from './components/Chart.js';
 import Form from './components/Form.js';
 import TireForm from './components/TireForm.js';
+import Persistence from './components/Persistence.js';
 
 class App extends Component {
   constructor() {
@@ -31,9 +32,7 @@ class App extends Component {
       <div className="App">
         <header>Gear vs Speed</header>
 
-        <div>
-          <Chart drivetrains={this.state.drivetrains} />
-        </div>
+        <Chart drivetrains={this.state.drivetrains} />
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
@@ -50,6 +49,8 @@ class App extends Component {
             <br />
           </div>
         )}
+
+        <Persistence drivetrains={this.state.drivetrains} />
 
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
