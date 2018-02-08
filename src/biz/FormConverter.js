@@ -14,7 +14,7 @@ class FormConverter {
     // Copy all the non-gear-ratio stuff over.
     for(let key in drivetrain) {
       if (drivetrain.hasOwnProperty(key)) { // Don't include system params.
-        if(key != 'gearRatios') { // This seems very coincidental with a drivetrain's structure. I don't like it.
+        if(key !== 'gearRatios') { // This seems very coincidental with a drivetrain's structure. I don't like it.
           params[key] = drivetrain[key];
         }
       }
