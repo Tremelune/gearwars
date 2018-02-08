@@ -26,4 +26,4 @@ class Persister {
   }
 }
 
-export default Persister;
+export default new Persister();
