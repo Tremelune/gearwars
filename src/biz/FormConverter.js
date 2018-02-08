@@ -1,11 +1,10 @@
-/**
-* Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
-* like it should very much be unit tested.
-*/
 const KEY_GEAR = 'gear'; // Is there a way to make this private?
 
 class FormConverter {
  /**
+  * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
+  * like it should very much be unit tested.
+  *
   * From: {redline: 6800, gearRatios: [1.1, 2.2]}
   * To: {redline: 6800, gear0: 1.1, gear2: 2.2}
   */
@@ -31,6 +30,9 @@ class FormConverter {
   }
 
  /**
+  * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
+  * like it should very much be unit tested.
+  *
   * From: {redline: 6800, gear0: 1.1, gear2: 2.2}
   * To: {redline: 6800, gearRatios: [1.1, 2.2]}
   */
