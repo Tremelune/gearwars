@@ -14,16 +14,25 @@
 export function generateGradient(index, count) {
   // This should be a class-level constant...
   const gradientRanges = [
-    {first: '#ff0000', last: 'ffcccc'},
-    {first: '#0000ff', last: 'ccccff'},
-    {first: '#00ff00', last: 'ccffcc'},
+    {first: '#dd0000', last: 'ffcccc'},
+    {first: '#0000dd', last: 'ccccff'},
+    {first: '#00aa00', last: 'ccffcc'},
+    {first: '#aa00aa', last: 'ffccff'},
+    {first: '#ff8800', last: 'ffffcc'},
   ];
 
   let gradientRange = gradientRanges[index];
 
   let Rainbow = require('rainbowvis.js'); // Constant??
   let rainbow = new Rainbow();
-  rainbow.setSpectrum(gradientRange.first, gradientRange.last);
+
+  // We have some hard-coded colors...but if someone wants more, just give 'em something random...
+  if(index < 5) {
+    rainbow.setSpectrum(gradientRange.first, gradientRange.last);
+  } else {
+    rainbow.setSpectrum(getRandomColor(), getRandomColor());
+  }
+
   rainbow.setNumberRange(0, count - 1);
 
   let colors = [];
@@ -32,4 +41,14 @@ export function generateGradient(index, count) {
   }
 
   return colors;
+}
+
+// Pulled from: https://stackoverflow.com/questions/1484506/random-color-generator
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
