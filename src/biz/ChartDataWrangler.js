@@ -1,4 +1,4 @@
-import * as Calculator from './GearingCalculator.js';
+import GearingCalculator from './GearingCalculator.js';
 
 class ChartDataWrangler {
  /**
@@ -10,7 +10,8 @@ class ChartDataWrangler {
   */
   static toData(drivetrain) {
     return drivetrain.gearRatios.map((gearRatio, index) => {
-      let speed = Calculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
+      let speed =
+        GearingCalculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
       return [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
     });
   }
