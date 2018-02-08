@@ -4,9 +4,7 @@ import FormConverter from '../biz/FormConverter.js';
 import GearingCalculator from '../biz/GearingCalculator.js';
 
 class TireForm extends Component {
-  /**
-   * @params props: Tire size, such as: {props: '235/45-17'};
-   */
+  /** @params props: Tire size, ex: {tireSize: '235/45-17'}; */
   constructor(props) {
     super(props);
 
