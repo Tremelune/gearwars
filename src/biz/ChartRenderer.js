@@ -1,5 +1,5 @@
 import GearingCalculator from './GearingCalculator.js';
-import * as LineColoration from './LineColoration.js';
+import lineColoration from './LineColoration.js';
 
 class ChartRenderer {
   /** Generates line colors. One gradient per drivetrain. One color per gear. */
@@ -8,7 +8,7 @@ class ChartRenderer {
     let gradients = [];
     drivetrains.map((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
-      let gradient = LineColoration.generateGradient(index, count)
+      let gradient = lineColoration.generateGradient(index, count)
       gradients = [...gradients, ...gradient];
       return null;
     })
@@ -17,7 +17,7 @@ class ChartRenderer {
 
 
  /**
-  * Converts drivetrains to chart data, and combines them in a single array. THe data structure matches that used by
+  * Converts drivetrains to chart data, and combines them in a single array. The data structure matches that used by
   * our chart library in Chart.js.
   */
   static buildDataFromDrivetrains(drivetrains) {
