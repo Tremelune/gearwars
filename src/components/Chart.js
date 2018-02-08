@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
-import * as ChartWrangler from '../biz/ChartDataWrangler.js';
+import ChartDataWrangler from '../biz/ChartDataWrangler.js';
 import * as LineColoration from '../biz/LineColoration.js';
 
 /** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
@@ -80,7 +80,7 @@ class Chart extends Component {
     // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
     props.drivetrains.map((drivetrain, index) => {
-      let data = ChartWrangler.toData(drivetrain);
+      let data = ChartDataWrangler.toData(drivetrain);
       combinedData = [...combinedData, ...data];
       return null;
     })
