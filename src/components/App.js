@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-import Chart from './components/Chart.js';
-import Form from './components/Form.js';
-import TireForm from './components/TireForm.js';
-import Persistence from './components/Persistence.js';
-import persister from './biz/Persister.js';
+import '../App.css';
+import Chart from './Chart.js';
+import Form from './Form.js';
+import Persistence from './Persistence.js';
+import TireForm from './TireForm.js';
+import persister from '../biz/Persister.js';
 
 class App extends Component {
   constructor() {
