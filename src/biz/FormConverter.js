@@ -2,7 +2,7 @@
 * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
 * like it should very much be unit tested.
 */
-const GEAR_KEY = 'gear'; // Is there a way to make this private?
+const KEY_GEAR = 'gear'; // Is there a way to make this private?
 
 class FormConverter {
  /**
@@ -10,17 +10,18 @@ class FormConverter {
   * To: {redline: 6800, gear0: 1.1, gear2: 2.2}
   */
   static paramsFromDrivetrain(drivetrain) {
-    // todo I think I can use [name]: value to do this implicitly.
-    let params = {
-      name: drivetrain.name,
-      tireDiameter: drivetrain.tireDiameter,
-      finalDrive: drivetrain.finalDrive,
-      redline: drivetrain.redline,
+    let params = {};
+
+    // Copy all the non-gear-ratio stuff over.
+    for(let key in drivetrain) {
+      if(key != 'gearRatios') { // This seems very coincidental with a drivetrain's structure. I don't like it.
+        params[key] = drivetrain[key];
+      }
     }
 
     // Turn the array of gears into individual key/value pairs.
     for(let i=0; i<drivetrain.gearRatios.length; i++) {
-      let key = GEAR_KEY + i;
+      let key = KEY_GEAR + i;
       params[key] = drivetrain.gearRatios[i];
     }
 
@@ -38,8 +39,8 @@ class FormConverter {
     // Absolutely has to be a better way to do all this.
     for (let key in params) {
       if (params.hasOwnProperty(key)) { // Don't include system params.
-        if(key.startsWith(GEAR_KEY)) {
-          let split = key.split(GEAR_KEY);
+        if(key.startsWith(KEY_GEAR)) {
+          let split = key.split(KEY_GEAR);
           let index = split[split.length - 1];
           drivetrain.gearRatios[index] = params[key];
         } else {
