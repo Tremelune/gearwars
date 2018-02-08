@@ -6,9 +6,9 @@ export function clear() {
   localStorage.clear();
 }
 
-export function revert() {
+export function load() {
   let drivetrains = JSON.parse(localStorage.getItem(KEY));
-  console.log("Reverting to:", drivetrains);
+  console.log("Loading:", drivetrains);
   return drivetrains;
 }
 

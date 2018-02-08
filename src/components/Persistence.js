@@ -11,10 +11,18 @@ class Persistence extends Component {
     return (
       <div>
         <button onClick={(e) => Persister.clear()}>Clear</button>
-        <button onClick={(e) => Persister.revert()}>Revert</button>
-        <button onClick={(e) => Persister.save(this.props)}>Save</button>
+        <button onClick={(e) => this.revert()}>Revert</button>
+        <button onClick={(e) => Persister.save(this.props.drivetrains)}>Save</button>
       </div>
     );
+  }
+
+
+  revert() {
+    let drivetrains = Persister.load();
+    if(drivetrains) {
+      this.props.setDrivetrains(drivetrains);      
+    }
   }
 }
 

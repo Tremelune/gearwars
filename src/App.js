@@ -50,7 +50,7 @@ class App extends Component {
           </div>
         )}
 
-        <Persistence drivetrains={this.state.drivetrains} />
+        <Persistence drivetrains={this.state.drivetrains} setDrivetrains={this.setDrivetrains} />
 
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
       </div>
@@ -76,6 +76,12 @@ class App extends Component {
     // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
     let drivetrains = this.state.drivetrains.slice();
     drivetrains[formId] = drivetrain;
+    this.setDrivetrains(drivetrains);
+  }
+
+
+  // Sneaky syntax allows for 'this' to be accessible.
+  setDrivetrains = (drivetrains) => {
     this.setState({drivetrains: drivetrains});
   }
 }
