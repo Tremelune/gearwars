@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from '../components/App';
 
 // Okay...Now what do I do?
 it('renders without crashing', () => {
