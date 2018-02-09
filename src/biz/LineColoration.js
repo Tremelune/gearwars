@@ -1,9 +1,9 @@
 const GRADIENT_RANGES = [
-  {first: '#dd0000', last: '#ffcccc'},
-  {first: '#0000dd', last: '#ccccff'},
-  {first: '#00aa00', last: '#ccffcc'},
-  {first: '#aa00aa', last: '#ffccff'},
-  {first: '#ff8800', last: '#ffffcc'},
+  {first: 'dd0000', last: 'ffcccc'},
+  {first: '0000dd', last: 'ccccff'},
+  {first: '00aa00', last: 'ccffcc'},
+  {first: 'aa00aa', last: 'ffccff'},
+  {first: 'ff8800', last: 'ffffcc'},
 ];
 
 
