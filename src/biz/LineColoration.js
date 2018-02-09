@@ -1,9 +1,9 @@
 const GRADIENT_RANGES = [
-  {first: 'dd0000', last: 'ffcccc'},
-  {first: '0000dd', last: 'ccccff'},
-  {first: '00aa00', last: 'ccffcc'},
-  {first: 'aa00aa', last: 'ffccff'},
-  {first: 'ff8800', last: 'ffffcc'},
+  {first: '#dd0000', last: '#ffcccc'},
+  {first: '#0000dd', last: '#ccccff'},
+  {first: '#00aa00', last: '#ccffcc'},
+  {first: '#aa00aa', last: '#ffccff'},
+  {first: '#ff8800', last: '#ffffcc'},
 ];
 
 
@@ -47,8 +47,9 @@ class LineColoration {
     return colors;
   }
 
+  // When this is static, the tests fail. It doesn't need to be static, so I'm inclined not to worry about it.
   // Pulled from: https://stackoverflow.com/questions/1484506/random-color-generator
-  static getRandomColor() {
+  getRandomColor() {
     let letters = '0123456789ABCDEF';
     let color = '#';
     for (var i = 0; i < 6; i++) {
