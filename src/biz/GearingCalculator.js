@@ -1,4 +1,4 @@
-class GearingCalculator {
+export default class GearingCalculator {
  /**
   * Calculates speed (to the nearest MPH) from engine RPM and drivetrain gearing. I pulled this jank math from:
   * http://www.hotrod.com/articles/speed-rpm-gear-ratio-tire-size-formula/
@@ -28,5 +28,3 @@ class GearingCalculator {
     return Number(diameter.toFixed(1));
   }
 }
-
-export default GearingCalculator;

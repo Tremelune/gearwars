@@ -1,6 +1,6 @@
 const KEY_GEAR = 'gear'; // Is there a way to make this private?
 
-class FormConverter {
+export default class FormConverter {
  /**
   * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
   * like it should very much be unit tested.
@@ -77,5 +77,3 @@ class FormConverter {
     }
   }
 }
-
-export default FormConverter;
