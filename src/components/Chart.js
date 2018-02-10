@@ -24,7 +24,7 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
-    this.chartRenderer = new ChartRenderer(locator.lineColoration);
+    this.chartRenderer = locator.chartRenderer;
     this.state = this.calculateDimensions();
   }
 
