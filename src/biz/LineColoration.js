@@ -7,7 +7,7 @@ const GRADIENT_RANGES = [
 ];
 
 
-class LineColoration {
+export default class LineColoration {
   constructor() {
     // Pulled from: https://github.com/anomal/RainbowVis-JS/
     let Rainbow = require('rainbowvis.js');
@@ -58,5 +58,3 @@ class LineColoration {
     return color;
   }
 }
-
-export default new LineColoration();

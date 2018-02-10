@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import ChartRenderer from '../biz/ChartRenderer.js';
-import lineColoration from '../biz/LineColoration.js';
+import locator from '../biz/Locator.js'
 
 /** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
 class Chart extends Component {
@@ -24,7 +24,7 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
-    this.chartRenderer = new ChartRenderer(lineColoration);
+    this.chartRenderer = new ChartRenderer(locator.lineColoration);
     this.state = this.calculateDimensions();
   }
 
