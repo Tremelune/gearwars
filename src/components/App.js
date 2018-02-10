@@ -4,14 +4,14 @@ import Chart from './Chart.js';
 import Form from './Form.js';
 import Persistence from './Persistence.js';
 import TireForm from './TireForm.js';
-import persister from '../biz/Persister.js';
+import locator from '../biz/Locator.js';
 
 class App extends Component {
   constructor() {
     super();
 
     // Check for stored stuff...If there's none, use a default.
-    let drivetrains = persister.load(); // todo Service locator. Dang.
+    let drivetrains = locator.persister.load();
     if(!drivetrains) {
       drivetrains = [{
         name: "Mustang",

@@ -24,13 +24,12 @@ class Chart extends Component {
    */
   constructor(props) {
     super();
-    this.chartRenderer = locator.chartRenderer;
     this.state = this.calculateDimensions();
   }
 
 
   render() {
-    let lineColors = this.chartRenderer.generateLineColors(this.props.drivetrains);
+    let lineColors = locator.chartRenderer.generateLineColors(this.props.drivetrains);
     let data = ChartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
     return (
       <LineChart
