@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Chart from './Chart.js';
-import Form from './Form.js';
+import Comparison from './Comparison.js';
 import Persistence from './Persistence.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
@@ -30,8 +30,6 @@ class App extends Component {
 
 
   render() {
-    // Don't show the (Remove) button if there's only one listed drivetrain.
-    let removeButtonText = this.state.drivetrains.length > 1 ? "(Remove)" : "";
     let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
@@ -42,48 +40,13 @@ class App extends Component {
         <TireForm tireSize={this.state.tireSize} />
         <br />
 
-        {this.state.drivetrains.map((drivetrain, index) =>
-          <div key={index}>
-            <div className="drivetrainTitle">
-              <b>Drivetrain {index + 1}</b>
-              <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-              <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
-            </div>
-
-            <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-            <br />
-          </div>
-        )}
-
-        <Persistence drivetrains={this.state.drivetrains} setDrivetrains={this.setDrivetrains} />
+        <Comparison drivetrains={this.state.drivetrains} setDrivetrains={this.setDrivetrains} />
 
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
 
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
       </div>
     );
-  }
-
-
-  duplicateDrivetrain = (index) => {
-    let drivetrains = this.state.drivetrains.slice();
-    let drivetrain = drivetrains[index];
-    drivetrains.push(drivetrain);
-    this.setState({drivetrains: drivetrains});
-  }
-
-  removeDrivetrain = (index) => {
-    let drivetrains = this.state.drivetrains.slice();
-    drivetrains.splice(index, 1);
-    this.setState({drivetrains: drivetrains});
-  }
-
-  // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrain = (formId, drivetrain) => {
-    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.drivetrains.slice();
-    drivetrains[formId] = drivetrain;
-    this.setDrivetrains(drivetrains);
   }
 
 
