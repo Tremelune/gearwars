@@ -3,7 +3,7 @@ import '../App.css';
 import FormConverter from '../biz/FormConverter.js';
 import GearingCalculator from '../biz/GearingCalculator.js';
 
-class TireForm extends Component {
+export default class TireForm extends Component {
   /** @params props: Tire size, ex: {tireSize: '235/45-17'}; */
   constructor(props) {
     super(props);
@@ -49,5 +49,3 @@ class TireForm extends Component {
     }
   }
 }
-
-export default TireForm;

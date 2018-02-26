@@ -1,18 +1,8 @@
 import GearingCalculator from './GearingCalculator.js';
-import lineColoration from './LineColoration.js';
 
-class ChartRenderer {
-  /** Generates line colors. One gradient per drivetrain. One color per gear. */
-  static generateLineColors(drivetrains) {
-    // This seems a bit weird, but I didn't know how to append in a map().
-    let gradients = [];
-    drivetrains.map((drivetrain, index) => {
-      let count = drivetrain.gearRatios.length;
-      let gradient = lineColoration.generateGradient(index, count)
-      gradients = [...gradients, ...gradient];
-      return null;
-    })
-    return gradients;
+export default class ChartRenderer {
+  constructor(lineColoration) {
+    this.lineColoration = lineColoration;
   }
 
 
@@ -23,9 +13,9 @@ class ChartRenderer {
   static buildDataFromDrivetrains(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
-    drivetrains.map((drivetrain, index) => {
+    drivetrains.forEach((drivetrain, index) => {
       let data = this.toData(drivetrain);
-      combinedData = [...combinedData, ...data];
+      Array.prototype.push.apply(combinedData, data);
       return null;
     })
     return combinedData;
@@ -49,6 +39,20 @@ class ChartRenderer {
   }
 
 
+  /** Generates line colors. One gradient per drivetrain. One color per gear. */
+  generateLineColors(drivetrains) {
+    // This seems a bit weird, but I didn't know how to append in a map().
+    let gradients = [];
+    drivetrains.forEach((drivetrain, index) => {
+      let count = drivetrain.gearRatios.length;
+      let gradient = this.lineColoration.generateGradient(index, count)
+      Array.prototype.push.apply(gradients, gradient);
+      return null;
+    })
+    return gradients;
+  }
+
+
  /**
   * Converts data into format easily chartable by Chart:
   * [
@@ -64,5 +68,3 @@ class ChartRenderer {
     });
   }
 }
-
-export default ChartRenderer;
