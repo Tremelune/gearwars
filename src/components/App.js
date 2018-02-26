@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import Chart from './Chart.js';
 import Comparison from './Comparison.js';
+import ComparisonList from './ComparisonList.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
 
@@ -11,9 +12,11 @@ class App extends Component {
 
     // Check for stored stuff...If there's none, use a default.
     let comparison = locator.persister.load();
+    let comparisons;
     let drivetrains; // We don't need the comparison name yet.
     if(comparison) {
       drivetrains = comparison.drivetrains;
+      comparisons = [comparison];
     } else {
       drivetrains = [{
         name: "EcoBoost",
@@ -22,10 +25,16 @@ class App extends Component {
         gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
         redline: 6800,
       }];
+
+      comparisons = [{
+        name: 'Dummy',
+        drivetrains: drivetrains,
+      }]
     }
 
     this.state = {
       tireSize: '235/50-18',
+      comparisons: comparisons,
       drivetrains: drivetrains,
     };
   }
@@ -38,6 +47,8 @@ class App extends Component {
         <header>Gear vs Speed</header>
 
         <Chart drivetrains={this.state.drivetrains} />
+
+        <ComparisonList comparisons={this.state.comparisons} />
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
