@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import Chart from './Chart.js';
 import Comparison from './Comparison.js';
-import Persistence from './Persistence.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
 
@@ -11,10 +10,13 @@ class App extends Component {
     super();
 
     // Check for stored stuff...If there's none, use a default.
-    let drivetrains = locator.persister.load();
-    if(!drivetrains) {
+    let comparison = locator.persister.load();
+    let drivetrains; // We don't need the comparison name yet.
+    if(comparison) {
+      drivetrains = comparison.drivetrains;
+    } else {
       drivetrains = [{
-        name: "Mustang",
+        name: "EcoBoost",
         tireDiameter: 27.3, // Inches
         finalDrive: 3.31,
         gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],

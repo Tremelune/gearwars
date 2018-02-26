@@ -14,13 +14,13 @@ export default class Persister {
   }
 
   load() {
-    let drivetrains = JSON.parse(localStorage.getItem(KEY));
-    console.log("Loading:", drivetrains);
-    return drivetrains;
+    let comparison = JSON.parse(localStorage.getItem(KEY));
+    console.log("Loading:", comparison);
+    return comparison;
   }
 
-  save(drivetrains) {
-    console.log("Saving:", drivetrains);
-    localStorage.setItem(KEY, JSON.stringify(drivetrains));
+  save(comparison) {
+    console.log("Saving:", comparison);
+    localStorage.setItem(KEY, JSON.stringify(comparison));
   }
 }
