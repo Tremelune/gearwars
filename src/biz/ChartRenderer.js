@@ -13,7 +13,7 @@ export default class ChartRenderer {
   static buildDataFromDrivetrains(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
-    drivetrains.map((drivetrain, index) => {
+    drivetrains.forEach((drivetrain, index) => {
       let data = this.toData(drivetrain);
       combinedData = [...combinedData, ...data];
       return null;
@@ -43,7 +43,7 @@ export default class ChartRenderer {
   generateLineColors(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().
     let gradients = [];
-    drivetrains.map((drivetrain, index) => {
+    drivetrains.forEach((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
       let gradient = this.lineColoration.generateGradient(index, count)
       gradients = [...gradients, ...gradient];
