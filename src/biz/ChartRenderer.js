@@ -15,7 +15,7 @@ export default class ChartRenderer {
     let combinedData = [];
     drivetrains.forEach((drivetrain, index) => {
       let data = this.toData(drivetrain);
-      combinedData = [...combinedData, ...data];
+      Array.prototype.push.apply(combinedData, data);
       return null;
     })
     return combinedData;
@@ -46,7 +46,7 @@ export default class ChartRenderer {
     drivetrains.forEach((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
       let gradient = this.lineColoration.generateGradient(index, count)
-      gradients = [...gradients, ...gradient];
+      Array.prototype.push.apply(gradients, gradient);
       return null;
     })
     return gradients;
