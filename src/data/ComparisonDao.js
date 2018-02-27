@@ -5,19 +5,19 @@ export default class ComparisonDao {
   }
 
 
-  getAllComparisons() {
+  getAll() {
     return this.db.getAll(this.type);
   }
 
-  getComparison(id) {
+  get(id) {
     return this.db.get(this.type, id);
   }
 
-  saveComparison(comparison) {
+  save(comparison) {
     return this.db.save(this.type, comparison);
   }
 
-  deleteComparison(id) {
+  delete(id) {
     this.db.delete(this.type, id);
   }
 }

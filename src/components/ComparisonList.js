@@ -19,7 +19,7 @@ export default class ComparisonList extends Component {
 
 
   deleteComparison(id) {
-    locator.comparisonDao.deleteComparison(id);
+    locator.comparisonDao.delete(id);
     this.props.reloadSavedComparisons();
   }
 }

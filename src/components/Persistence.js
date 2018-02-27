@@ -39,6 +39,6 @@ export default class Persistence extends Component {
   save = () => {
     let comparison = this.props.comparison;
     comparison.name = this.state.name;
-    locator.comparisonDao.saveComparison(comparison);
+    locator.comparisonDao.save(comparison);
   }
 }
