@@ -7,14 +7,16 @@ const KEY_COMPARISONS = "comparisons";
  *
  * When this project grows, this should be put somewhere distinct from business logic, as it is more of a data/resource
  * class that shouldn't have business logic.
+ *
+ * todo Bust this out into Database and ComparisonDao classes.
  */
 let comparisons = new Map([]);
 
 export default class Persister {
-  clear() {
-    console.log("Clearing local storage...");
-    localStorage.clear();
-  }
+  // clear() {
+  //   console.log("Clearing local storage...");
+  //   localStorage.clear();
+  // }
 
  /** @return Unordered array of comparisons. */
   getAllComparisons() {
@@ -29,6 +31,12 @@ export default class Persister {
   saveComparison(comparison) {
     console.log("Saving:", comparison);
     comparisons.set(comparison.name, comparison);
+    this.storeDatabase();
+  }
+
+  deleteComparison(name) {
+    console.log("Deleting:", name);
+    comparisons.delete(name);
     this.storeDatabase();
   }
 

@@ -13,8 +13,8 @@ class App extends Component {
     // Check for stored stuff...If there's none, use a default.
     // locator.persister.clear()
     let comparisons = locator.persister.getAllComparisons();
-    let hasSaved = comparisons.length > 0;
-    if(!hasSaved) {
+    let currentComparison;
+    if(comparisons.length <= 0) {
       let drivetrains = [{
         name: "EcoBoost",
         tireDiameter: 27.3, // Inches
@@ -23,22 +23,24 @@ class App extends Component {
         redline: 6800,
       }];
 
-      comparisons = [{
+      currentComparison = {
         name: 'Mustang',
         drivetrains: drivetrains,
-      }]
+      }
+    } else {
+      currentComparison = comparisons[0];
     }
 
     this.state = {
       tireSize: '235/50-18',
       comparisons: comparisons,
-      hasSaved: hasSaved,
+      currentComparison: currentComparison,
     };
   }
 
 
   render() {
-    let comparison = this.state.comparisons[0];
+    let comparison = this.state.currentComparison;
     let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
@@ -46,12 +48,12 @@ class App extends Component {
 
         <Chart drivetrains={comparison.drivetrains} />
 
-        <ComparisonList comparisons={this.state.comparisons} />
+        <ComparisonList comparisons={this.state.comparisons} reloadSavedComparisons={this.reloadSavedComparisons} />
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
 
-        <Comparison comparison={comparison} hasSaved={this.state.hasSaved} setComparison={this.setComparison} />
+        <Comparison comparison={comparison} setComparison={this.setComparison} />
 
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
 
@@ -61,9 +63,13 @@ class App extends Component {
   }
 
 
-  // Sneaky syntax allows for 'this' to be accessible.
   setComparison = (comparison) => {
     this.setState({comparisons: [comparison]});
+  }
+
+  reloadSavedComparisons = () => {
+    let comparisons = locator.persister.getAllComparisons();
+    this.setState({comparisons: comparisons});
   }
 }
 

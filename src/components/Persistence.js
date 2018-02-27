@@ -5,30 +5,40 @@ export default class Persistence extends Component {
  /**
   * Props:
   * @param comparison The current comparison.
-  * @param hasSaved Whether or not there is a persisted comparison.
   */
-  render() {
-    let revertButton = '';
-    if(this.props.hasSaved) {
-      revertButton = <button onClick={(e) => this.revert()}>Load Saved</button>
-    }
+  constructor(props) {
+    super(props);
+    this.state = {name: props.comparison.name};
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
+
+  render() {
     return (
-      <div>
-        <button onClick={(e) => locator.persister.clear()}>Clear Saved</button>
-        {revertButton}
-        <button onClick={(e) => locator.persister.saveComparison(this.props.comparison)}>Save</button>
+      <form>
+        <div>
+          Comparison name: <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
+          <button onClick={this.save}>Save</button>
+        </div>
         <br />
         <br />
-      </div>
+      </form>
     );
   }
 
 
-  revert() {
-    let comparison = locator.persister.getComparison(this.props.comparison.name);
-    if(comparison) {
-      this.props.setComparison(comparison);
-    }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({[name]: value});
+  }
+
+
+  save = () => {
+    let comparison = this.props.comparison;
+    comparison.name = this.state.name;
+    locator.persister.saveComparison(comparison);
   }
 }
