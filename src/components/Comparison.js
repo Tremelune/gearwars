@@ -30,7 +30,7 @@ class Comparison extends Component {
           </div>
         )}
 
-        <Persistence comparison={comparison} setComparison={this.setComparison} />
+        <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
       </div>
     );
   }

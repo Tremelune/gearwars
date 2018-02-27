@@ -13,7 +13,8 @@ class App extends Component {
     // Check for stored stuff...If there's none, use a default.
     // locator.persister.clear()
     let comparisons = locator.persister.getAllComparisons();
-    if(comparisons.length <= 0) {
+    let hasSaved = comparisons.length > 0;
+    if(!hasSaved) {
       let drivetrains = [{
         name: "EcoBoost",
         tireDiameter: 27.3, // Inches
@@ -31,6 +32,7 @@ class App extends Component {
     this.state = {
       tireSize: '235/50-18',
       comparisons: comparisons,
+      hasSaved: hasSaved,
     };
   }
 
@@ -49,9 +51,9 @@ class App extends Component {
         <TireForm tireSize={this.state.tireSize} />
         <br />
 
-        <Comparison comparison={comparison} setComparison={this.setComparison} />
+        <Comparison comparison={comparison} hasSaved={this.state.hasSaved} setComparison={this.setComparison} />
 
-        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
+        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
 
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
       </div>
