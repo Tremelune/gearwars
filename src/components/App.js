@@ -42,13 +42,20 @@ class App extends Component {
   render() {
     let comparison = this.state.currentComparison;
     let revolioWidth = Math.min(window.innerWidth, 400);
+
+    let comparisonList = '';
+    if(this.state.comparisons.length > 0) {
+      comparisonList =
+        <ComparisonList comparisons={this.state.comparisons} reloadSavedComparisons={this.reloadSavedComparisons} />
+    }
+
     return (
       <div className="App">
         <header>Gear vs Speed</header>
 
         <Chart drivetrains={comparison.drivetrains} />
 
-        <ComparisonList comparisons={this.state.comparisons} reloadSavedComparisons={this.reloadSavedComparisons} />
+        {comparisonList}
 
         <TireForm tireSize={this.state.tireSize} />
         <br />

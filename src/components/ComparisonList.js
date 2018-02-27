@@ -8,7 +8,7 @@ export default class ComparisonList extends Component {
         <b>Saved Comparisons</b>
         {this.props.comparisons.map((comparison, index) =>
           <div key={index}>
-            Name: {comparison.name}
+            {comparison.name}
             <a onClick={(e) => this.deleteComparison(comparison.name)}>(remove)</a>
           </div>
         )}

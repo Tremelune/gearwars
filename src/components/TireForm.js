@@ -20,11 +20,10 @@ export default class TireForm extends Component {
     return (
       <div>
         <form>
-            Tire size:
+            <b>Tire Diameter Calculator</b><br />
             <input name="size" type="text" value={this.state.size} onChange={this.handleInputChange} />
+            Diameter: {this.state.diameter}
         </form>
-
-        Diameter: {this.state.diameter}
       </div>
     );
   }

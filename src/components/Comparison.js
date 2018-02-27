@@ -12,16 +12,16 @@ class Comparison extends Component {
   render() {
     // Don't show the (Remove) button if there's only one listed drivetrain.
     let comparison = this.state.comparison;
-    let removeButtonText = comparison.drivetrains.length > 1 ? "(Remove)" : "";
+    let removeButtonText = comparison.drivetrains.length > 1 ? "(remove)" : "";
     return (
       <div>
-        Comparison: {comparison.name}<br />
+        <b>Comparison: {comparison.name}</b><br />
 
         {comparison.drivetrains.map((drivetrain, index) =>
           <div key={index}>
             <div className="drivetrainTitle">
               <b>Drivetrain {index + 1}</b>
-              <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
+              <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
               <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
             </div>
 
