@@ -5,20 +5,19 @@ import Persistence from './Persistence.js';
 class Comparison extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      comparison: {drivetrains: props.drivetrains},
-      setDrivetrains: props.setDrivetrains,
-    }
+    this.state = {comparison: props.comparison};
   }
 
 
   render() {
     // Don't show the (Remove) button if there's only one listed drivetrain.
-    let removeButtonText = this.state.comparison.drivetrains.length > 1 ? "(Remove)" : "";
+    let comparison = this.state.comparison;
+    let removeButtonText = comparison.drivetrains.length > 1 ? "(Remove)" : "";
     return (
       <div>
-        {this.state.comparison.drivetrains.map((drivetrain, index) =>
+        Comparison: {comparison.name}<br />
+
+        {comparison.drivetrains.map((drivetrain, index) =>
           <div key={index}>
             <div className="drivetrainTitle">
               <b>Drivetrain {index + 1}</b>
@@ -31,39 +30,43 @@ class Comparison extends Component {
           </div>
         )}
 
-        <Persistence comparison={this.state.comparison} setDrivetrains={this.setDrivetrains} />
+        <Persistence comparison={comparison} setComparison={this.setComparison} />
       </div>
     );
   }
 
 
+  // Prolly time for some closures down here to remove dupe code...
   duplicateDrivetrain = (index) => {
-    let drivetrains = this.state.comparison.drivetrains.slice();
+    let comparison = this.state.comparison;
+    let drivetrains = comparison.drivetrains.slice();
     let drivetrain = drivetrains[index];
     drivetrains.push(drivetrain);
-    this.setDrivetrains(drivetrains);
+    comparison.drivetrains = drivetrains;
+    this.setComparison(comparison);
   }
 
   removeDrivetrain = (index) => {
-    let drivetrains = this.state.comparison.drivetrains.slice();
+    let comparison = this.state.comparison;
+    let drivetrains = comparison.drivetrains.slice();
     drivetrains.splice(index, 1);
-    this.setDrivetrains(drivetrains);
+    comparison.drivetrains = drivetrains;
+    this.setComparison(comparison);
   }
 
   setDrivetrain = (formId, drivetrain) => {
     // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.comparison.drivetrains.slice();
+    let comparison = this.state.comparison;
+    let drivetrains = comparison.drivetrains.slice();
     drivetrains[formId] = drivetrain;
-    this.setDrivetrains(drivetrains);
+    comparison.drivetrains = drivetrains;
+    this.setComparison(comparison);
   }
 
 
-  setDrivetrains = (drivetrains) => {
-    this.setState({
-      comparison: {drivetrains: drivetrains}
-    });
-
-    this.state.setDrivetrains(drivetrains);
+  setComparison = (comparison) => {
+    this.setState({comparison: comparison});
+    this.props.setComparison(comparison);
   }
 }
 

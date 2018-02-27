@@ -23,7 +23,7 @@ class Chart extends Component {
    * todo should be {drivetrains: []}
    */
   constructor(props) {
-    super();
+    super(props);
     this.state = this.calculateDimensions();
   }
 

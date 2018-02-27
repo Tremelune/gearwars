@@ -11,14 +11,10 @@ class App extends Component {
     super();
 
     // Check for stored stuff...If there's none, use a default.
-    let comparison = locator.persister.load();
-    let comparisons;
-    let drivetrains; // We don't need the comparison name yet.
-    if(comparison) {
-      drivetrains = comparison.drivetrains;
-      comparisons = [comparison];
-    } else {
-      drivetrains = [{
+    // locator.persister.clear()
+    let comparisons = locator.persister.getAllComparisons();
+    if(comparisons.length <= 0) {
+      let drivetrains = [{
         name: "EcoBoost",
         tireDiameter: 27.3, // Inches
         finalDrive: 3.31,
@@ -27,7 +23,7 @@ class App extends Component {
       }];
 
       comparisons = [{
-        name: 'Dummy',
+        name: 'Mustang',
         drivetrains: drivetrains,
       }]
     }
@@ -35,25 +31,25 @@ class App extends Component {
     this.state = {
       tireSize: '235/50-18',
       comparisons: comparisons,
-      drivetrains: drivetrains,
     };
   }
 
 
   render() {
+    let comparison = this.state.comparisons[0];
     let revolioWidth = Math.min(window.innerWidth, 400);
     return (
       <div className="App">
         <header>Gear vs Speed</header>
 
-        <Chart drivetrains={this.state.drivetrains} />
+        <Chart drivetrains={comparison.drivetrains} />
 
         <ComparisonList comparisons={this.state.comparisons} />
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
 
-        <Comparison drivetrains={this.state.drivetrains} setDrivetrains={this.setDrivetrains} />
+        <Comparison comparison={comparison} setComparison={this.setComparison} />
 
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
 
@@ -64,8 +60,8 @@ class App extends Component {
 
 
   // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrains = (drivetrains) => {
-    this.setState({drivetrains: drivetrains});
+  setComparison = (comparison) => {
+    this.setState({comparisons: [comparison]});
   }
 }
 

@@ -7,7 +7,7 @@ export default class Persistence extends Component {
       <div>
         <button onClick={(e) => locator.persister.clear()}>Clear Saved</button>
         <button onClick={(e) => this.revert()}>Load Saved</button>
-        <button onClick={(e) => locator.persister.save(this.props.comparison)}>Save</button>
+        <button onClick={(e) => locator.persister.saveComparison(this.props.comparison)}>Save</button>
         <br />
         <br />
       </div>
@@ -16,9 +16,9 @@ export default class Persistence extends Component {
 
 
   revert() {
-    let comparison = locator.persister.load();
-    if(comparison && comparison.drivetrains) {
-      this.props.setDrivetrains(comparison.drivetrains);
+    let comparison = locator.persister.getComparison(this.props.comparison.name);
+    if(comparison) {
+      this.props.setComparison(comparison);
     }
   }
 }

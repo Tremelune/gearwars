@@ -8,6 +8,14 @@ class Locator {
     this.lineColoration = new LineColoration();
     this.chartRenderer = new ChartRenderer(this.lineColoration);
     this.persister = new Persister();
+
+    this.init();
+  }
+
+
+  init() {
+    console.log("Initializing database...");
+    this.persister.refreshDatabase();
   }
 
 
