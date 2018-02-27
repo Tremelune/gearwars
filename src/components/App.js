@@ -11,8 +11,8 @@ class App extends Component {
     super();
 
     // Check for stored stuff...If there's none, use a default.
-    // locator.persister.clear()
-    let comparisons = locator.persister.getAllComparisons();
+    locator.db.clear();
+    let comparisons = locator.comparisonDao.getAllComparisons();
     let currentComparison;
     if(comparisons.length <= 0) {
       let drivetrains = [{

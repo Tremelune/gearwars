@@ -14,6 +14,7 @@ test('test save new', () => {
 
   let localStorage = new MockLocalStorage();
   let underTest = new Datamabase(localStorage);
+  underTest.init();
   comparison = underTest.save(Datamabase.typeComparisons, comparison);
   expect(comparison.id).toBeDefined();
 
@@ -41,6 +42,7 @@ test('test save existing', () => {
 
   let localStorage = new MockLocalStorage();
   let underTest = new Datamabase(localStorage);
+  underTest.init();
   let stored = underTest.save(Datamabase.typeComparisons, comparison);
 
   stored.name = 'bmw';
@@ -68,6 +70,7 @@ test('test delete', () => {
 
   let localStorage = new MockLocalStorage();
   let underTest = new Datamabase(localStorage);
+  underTest.init();
   a = underTest.save(Datamabase.typeComparisons, a);
   b = underTest.save(Datamabase.typeComparisons, b);
   c = underTest.save(Datamabase.typeComparisons, c);

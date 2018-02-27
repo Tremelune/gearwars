@@ -23,10 +23,17 @@ export default class Datamabase {
 
   constructor(localStorage) {
     this.localStorage = localStorage;
+  }
 
+
+  init() {
     // Due to the lack of class-member variables in ES6, I'm forced to declare a few things in the module, but that
     // makes them essentially public static globals, which is terrifying. The best I can do is clear them here...
     comparisons.clear();
+
+    keysToTables.forEach((value, key) => {
+      this.refreshTable(key);
+    });
   }
 
 
@@ -85,11 +92,14 @@ export default class Datamabase {
   // Loads the whole table from localstorage.
   refreshTable(key) {
     let results = this.localStorage.getItem(key)
-    let resultsArray = JSON.parse(results);
     let table = this.keyToTable(key);
     table.clear();
-    for(let result of resultsArray) {
-      table.set(result[0], result[1]);
+
+    if(results) {
+      let resultsArray = JSON.parse(results);
+      for(let result of resultsArray) {
+        table.set(result[0], result[1]);
+      }
     }
   }
 
@@ -102,7 +112,7 @@ export default class Datamabase {
   typeToKey(type) {
     let key = typesToKeys.get(type);
     if(!key) {
-      throw 'No key found for type: ' + type;
+      throw new Error('No key found for type: ' + type);
     }
     return key;
   }
@@ -110,7 +120,7 @@ export default class Datamabase {
   keyToTable(key) {
     let table = keysToTables.get(key);
     if(!table) {
-      throw 'No table found for type: ' + key;
+      throw new Error('No table found for type: ' + key);
     }
     return table;
   }
@@ -118,7 +128,9 @@ export default class Datamabase {
   // "UUID" generator from: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
   generateId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      var r = Math.random() * 16 | 0;
+      var ar = r & 0x3;
+      var v = c === 'x' ? r : (ar | 0x8);
       return v.toString(16);
     });
   }
