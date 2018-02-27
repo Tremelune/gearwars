@@ -60,6 +60,30 @@ test('test save existing', () => {
 });
 
 
+test('test delete', () => {
+  console.log('##### test delete');
+  let a = {name: 'porsche'};
+  let b = {name: 'bmw'};
+  let c = {name: 'jeep'};
+
+  let localStorage = new MockLocalStorage();
+  let underTest = new Datamabase(localStorage);
+  a = underTest.save(Datamabase.typeComparisons, a);
+  b = underTest.save(Datamabase.typeComparisons, b);
+  c = underTest.save(Datamabase.typeComparisons, c);
+  let comparisons = underTest.getAll(Datamabase.typeComparisons);
+  expect(comparisons.length).toEqual(3);
+
+  underTest.delete(Datamabase.typeComparisons, b.id);
+
+  comparisons = underTest.getAll(Datamabase.typeComparisons);
+  expect(comparisons.length).toEqual(2);
+  comparisons.map((comparison) => {
+    expect(comparison.name === 'porsche' || comparison.name === 'jeep');
+  });
+});
+
+
 class MockLocalStorage {
   constructor() {
     this.store = {};
