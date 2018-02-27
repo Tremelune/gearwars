@@ -9,7 +9,7 @@ export default class ComparisonList extends Component {
         {this.props.comparisons.map((comparison, index) =>
           <div key={index}>
             {comparison.name}
-            <a onClick={(e) => this.deleteComparison(comparison.name)}>(remove)</a>
+            <a onClick={(e) => this.deleteComparison(comparison.id)}>(remove)</a>
           </div>
         )}
         <br />
@@ -18,8 +18,8 @@ export default class ComparisonList extends Component {
   }
 
 
-  deleteComparison(name) {
-    locator.persister.deleteComparison(name);
+  deleteComparison(id) {
+    locator.comparisonDao.deleteComparison(id);
     this.props.reloadSavedComparisons();
   }
 }

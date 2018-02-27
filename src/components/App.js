@@ -11,7 +11,7 @@ class App extends Component {
     super();
 
     // Check for stored stuff...If there's none, use a default.
-    locator.db.clear();
+    // locator.db.clear();
     let comparisons = locator.comparisonDao.getAllComparisons();
     let currentComparison;
     if(comparisons.length <= 0) {
@@ -75,7 +75,7 @@ class App extends Component {
   }
 
   reloadSavedComparisons = () => {
-    let comparisons = locator.persister.getAllComparisons();
+    let comparisons = locator.comparisonDao.getAllComparisons();
     this.setState({comparisons: comparisons});
   }
 }
