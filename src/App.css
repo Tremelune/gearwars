@@ -5,5 +5,11 @@
 .drivetrainTitle a {
     text-decoration: none;
     color: gray;
-    size: small;
+    font-size: small;
+}
+
+.comparisonList a {
+    text-decoration: none;
+    color: gray;
+    font-size: small;
 }
