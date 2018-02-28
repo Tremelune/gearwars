@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Chart from './Chart.js';
-import Form from './Form.js';
-import Persistence from './Persistence.js';
+import Comparison from './Comparison.js';
+import ComparisonList from './ComparisonList.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
 
@@ -10,86 +10,84 @@ class App extends Component {
   constructor() {
     super();
 
-    // Check for stored stuff...If there's none, use a default.
-    let drivetrains = locator.persister.load();
-    if(!drivetrains) {
-      drivetrains = [{
-        name: "Mustang",
-        tireDiameter: 27.3, // Inches
-        finalDrive: 3.31,
-        gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-        redline: 6800,
-      }];
-    }
+    let comparisons = this.establishComparisons();
+    let currentComparison = comparisons[0];
 
     this.state = {
       tireSize: '235/50-18',
-      drivetrains: drivetrains,
+      comparisons: comparisons,
+      currentComparison: currentComparison,
     };
   }
 
 
   render() {
-    // Don't show the (Remove) button if there's only one listed drivetrain.
-    let removeButtonText = this.state.drivetrains.length > 1 ? "(Remove)" : "";
+    let comparison = this.state.currentComparison;
     let revolioWidth = Math.min(window.innerWidth, 400);
+
     return (
       <div className="App">
         <header>Gear vs Speed</header>
 
-        <Chart drivetrains={this.state.drivetrains} />
+        <Chart drivetrains={comparison.drivetrains} />
+
+        {this.state.comparisons.length > 0 &&
+          <ComparisonList
+            comparisons={this.state.comparisons}
+            selectedId={comparison.id}
+            reloadSavedComparisons={this.reloadSavedComparisons}
+            setComparison={this.setComparison}/>
+        }
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
 
-        {this.state.drivetrains.map((drivetrain, index) =>
-          <div key={index}>
-            <div className="drivetrainTitle">
-              <b>Drivetrain {index + 1}</b>
-              <a onClick={(e) => this.duplicateDrivetrain(index)}>(Duplicate)</a>
-              <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
-            </div>
+        <Comparison comparison={comparison} setComparison={this.setComparison} />
 
-            <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-            <br />
-          </div>
-        )}
-
-        <Persistence drivetrains={this.state.drivetrains} setDrivetrains={this.setDrivetrains} />
-
-        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument"/>
+        <br />
+        <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
 
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
       </div>
     );
   }
 
-
-  duplicateDrivetrain = (index) => {
-    let drivetrains = this.state.drivetrains.slice();
-    let drivetrain = drivetrains[index];
-    drivetrains.push(drivetrain);
-    this.setState({drivetrains: drivetrains});
+  setComparison = (comparison) => {
+    console.log('Selecting comparison:', comparison);
+    this.setState({currentComparison: comparison});
   }
 
-  removeDrivetrain = (index) => {
-    let drivetrains = this.state.drivetrains.slice();
-    drivetrains.splice(index, 1);
-    this.setState({drivetrains: drivetrains});
+  reloadSavedComparisons = (selectedId) => {
+    let comparisons = this.establishComparisons();
+    console.log('Selecting ' + selectedId + ' from:', comparisons);
+
+    this.setState({
+      comparisons: comparisons,
+      currentComparison: this.getSelected(comparisons, selectedId),
+    });
   }
 
-  // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrain = (formId, drivetrain) => {
-    // We have several drivetrains in state, so we use the form ID to replace just the one being updated.
-    let drivetrains = this.state.drivetrains.slice();
-    drivetrains[formId] = drivetrain;
-    this.setDrivetrains(drivetrains);
+  getSelected(comparisons, selectedId) {
+    comparisons.forEach((comparison) => {
+      if(comparison.id === selectedId) {
+        return comparison;
+      }
+    });
+
+    return comparisons[0];
   }
 
 
-  // Sneaky syntax allows for 'this' to be accessible.
-  setDrivetrains = (drivetrains) => {
-    this.setState({drivetrains: drivetrains});
+  /** Check for stored stuff...If there's none, use a default. Always has at least one element. */
+  establishComparisons() {
+    let comparisons = locator.comparisonDao.getAll();
+    if(comparisons.length <= 0) {
+      locator.accountInitializer.initialize();
+      comparisons = locator.comparisonDao.getAll();
+    }
+
+    console.log('Established comparisons:', comparisons);
+    return comparisons;
   }
 }
 

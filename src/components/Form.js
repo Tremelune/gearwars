@@ -5,10 +5,12 @@ import FormConverter from '../biz/FormConverter.js';
 export default class Form extends Component {
   constructor(props) {
     super(props);
+    this.state = this.stateFromProps(props);
+  }
 
-    this.state = FormConverter.paramsFromDrivetrain(props.drivetrain); // Prepopulate form with values.
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+  componentWillReceiveProps(props) {
+    this.setState(this.stateFromProps(props));
   }
 
 
@@ -41,7 +43,14 @@ export default class Form extends Component {
     );
   }
 
-  handleInputChange(event) {
+
+  // Prepopulate form with values.
+  stateFromProps(props) {
+    return FormConverter.paramsFromDrivetrain(props.drivetrain);
+  }
+
+
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

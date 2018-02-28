@@ -2,8 +2,33 @@
   text-align: center;
 }
 
+.comparisonList {
+  background-color: #eee;
+}
+
+.comparisonForm {
+  background-color: #eee;
+}
+
 .drivetrainTitle a {
     text-decoration: none;
     color: gray;
-    size: small;
+    font-size: small;
+}
+
+.comparisonList a {
+    text-decoration: none;
+}
+
+.comparisonName {
+  color: #0000dd;
+}
+
+.comparisonName a {
+  color: #000099;
+}
+
+.comparisonButtons {
+  color: gray;
+  font-size: small;
 }
