@@ -28,11 +28,11 @@ export default class ComparisonList extends Component {
 
 
   duplicate(comparison) {
+    console.log('Duplicating:', comparison);
     // The presence of an ID is what switches the update vs create logic in save...I dunno if it belongs here.
-    comparison.id = null;
-    comparison = locator.comparisonDao.save(comparison);
-    console.log('saved comparison', comparison);
-    this.props.reloadSavedComparisons(comparison.id);
+    let clone = {...comparison, id: null};
+    clone = locator.comparisonDao.save(clone);
+    this.props.reloadSavedComparisons(clone.id);
   }
 
   delete(id) {
