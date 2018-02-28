@@ -85,6 +85,8 @@ class App extends Component {
       locator.accountInitializer.initialize();
       comparisons = locator.comparisonDao.getAll();
     }
+
+    console.log('Established comparisons:', comparisons);
     return comparisons;
   }
 }
