@@ -12,7 +12,7 @@ export default class AccountInitializer {
 
   buildInitialComparison() {
     let drivetrains = [{
-      name: "EcoBoost",
+      name: "2015 EcoBoost Mustang",
       tireDiameter: 27.3, // Inches
       finalDrive: 3.31,
       gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
@@ -20,7 +20,7 @@ export default class AccountInitializer {
     }];
 
     return {
-      name: 'Mustang',
+      name: 'Default',
       drivetrains: drivetrains,
     }
   }
