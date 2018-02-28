@@ -15,10 +15,7 @@ class Comparison extends Component {
 
 
   render() {
-    // Don't show the (Remove) button if there's only one listed drivetrain.
     let comparison = this.state.comparison;
-    let removeButtonText = comparison.drivetrains.length > 1 ? "(remove)" : "";
-    
     return (
       <div>
         <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
@@ -28,7 +25,9 @@ class Comparison extends Component {
             <div className="drivetrainTitle">
               <b>Drivetrain {index + 1}</b>
               <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
-              <a onClick={(e) => this.removeDrivetrain(index)}>{removeButtonText}</a>
+              {comparison.drivetrains.length > 1 &&
+                <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
+              }
             </div>
 
             <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
