@@ -15,7 +15,7 @@ class Comparison extends Component {
     let removeButtonText = comparison.drivetrains.length > 1 ? "(remove)" : "";
     return (
       <div>
-        <b>Comparison: {comparison.name}</b><br />
+        <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
 
         {comparison.drivetrains.map((drivetrain, index) =>
           <div key={index}>
@@ -29,8 +29,6 @@ class Comparison extends Component {
             <br />
           </div>
         )}
-
-        <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
       </div>
     );
   }

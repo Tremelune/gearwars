@@ -10,14 +10,7 @@ class App extends Component {
   constructor() {
     super();
 
-    // Check for stored stuff...If there's none, use a default.
-    // locator.db.clear();
-    let comparisons = locator.comparisonDao.getAll();
-    if(comparisons.length <= 0) {
-      locator.accountInitializer.initialize();
-      comparisons = locator.comparisonDao.getAll();
-    }
-
+    let comparisons = this.establishComparisons();
     let currentComparison = comparisons[0];
 
     this.state = {
@@ -32,19 +25,19 @@ class App extends Component {
     let comparison = this.state.currentComparison;
     let revolioWidth = Math.min(window.innerWidth, 400);
 
-    let comparisonList = '';
-    if(this.state.comparisons.length > 0) {
-      comparisonList =
-        <ComparisonList comparisons={this.state.comparisons} reloadSavedComparisons={this.reloadSavedComparisons} />
-    }
-
     return (
       <div className="App">
         <header>Gear vs Speed</header>
 
         <Chart drivetrains={comparison.drivetrains} />
 
-        {comparisonList}
+        {this.state.comparisons.length > 0 &&
+          <ComparisonList
+            comparisons={this.state.comparisons}
+            selectedId={comparison.id}
+            reloadSavedComparisons={this.reloadSavedComparisons}
+            setComparison={this.setComparison}/>
+        }
 
         <TireForm tireSize={this.state.tireSize} />
         <br />
@@ -58,14 +51,41 @@ class App extends Component {
     );
   }
 
-
   setComparison = (comparison) => {
-    this.setState({comparisons: [comparison]});
+    console.log('Selecting comparison:', comparison);
+    this.setState({currentComparison: comparison});
   }
 
-  reloadSavedComparisons = () => {
+  reloadSavedComparisons = (selectedId) => {
+    let comparisons = this.establishComparisons();
+    console.log('comparisons', comparisons);
+
+    this.setState({
+      comparisons: comparisons,
+      currentComparison: this.getSelected(comparisons, selectedId),
+    });
+  }
+
+  getSelected(comparisons, id) {
+    comparisons.forEach((comparison) => {
+      if(comparison.id === id) {
+        return comparison;
+      }
+    });
+
+    return comparisons[0];
+  }
+
+
+  /** Check for stored stuff...If there's none, use a default. Always has at least one element. */
+  establishComparisons() {
+    console.log('Establishing one or more comparisons...');
     let comparisons = locator.comparisonDao.getAll();
-    this.setState({comparisons: comparisons});
+    if(comparisons.length <= 0) {
+      locator.accountInitializer.initialize();
+      comparisons = locator.comparisonDao.getAll();
+    }
+    return comparisons;
   }
 }
 

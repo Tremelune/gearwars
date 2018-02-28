@@ -55,7 +55,7 @@ export default class Datamabase {
   * entity).
   */
   save(type, entity) {
-    console.log('Saving ' + type + ' with ID:', entity.id);
+    console.log('Saving ' + type + ':', entity);
     let id = entity.id ? entity.id : this.generateId(); // Keep the existing ID, or roll one if this is a new entity.
     entity.id = id;
     this.typeToTable(type).set(id, entity);

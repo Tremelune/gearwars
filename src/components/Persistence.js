@@ -17,11 +17,10 @@ export default class Persistence extends Component {
     return (
       <form>
         <div>
-          Comparison name: <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
-          <button onClick={this.save}>Save</button>
+          <b>Comparison:</b>
+          <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
+          <button onClick={this.save}>Rename</button>
         </div>
-        <br />
-        <br />
       </form>
     );
   }

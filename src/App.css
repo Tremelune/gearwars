@@ -10,6 +10,17 @@
 
 .comparisonList a {
     text-decoration: none;
-    color: gray;
-    font-size: small;
+}
+
+.comparisonName {
+  color: #0000dd;
+}
+
+.comparisonName a {
+  color: #000099;
+}
+
+.comparisonButtons {
+  color: gray;
+  font-size: small;
 }
