@@ -9,7 +9,11 @@ export default class Persistence extends Component {
   constructor(props) {
     super(props);
     this.state = {name: props.comparison.name};
-    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+
+  componentWillReceiveProps(props) {
+    this.setState({name: props.comparison.name});
   }
 
 
@@ -26,7 +30,7 @@ export default class Persistence extends Component {
   }
 
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

@@ -9,10 +9,16 @@ class Comparison extends Component {
   }
 
 
+  componentWillReceiveProps(props) {
+    this.setState({comparison: props.comparison});
+  }
+
+
   render() {
     // Don't show the (Remove) button if there's only one listed drivetrain.
     let comparison = this.state.comparison;
     let removeButtonText = comparison.drivetrains.length > 1 ? "(remove)" : "";
+    
     return (
       <div>
         <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />

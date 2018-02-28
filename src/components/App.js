@@ -58,7 +58,7 @@ class App extends Component {
 
   reloadSavedComparisons = (selectedId) => {
     let comparisons = this.establishComparisons();
-    console.log('comparisons', comparisons);
+    console.log('Selecting ' + selectedId + ' from:', comparisons);
 
     this.setState({
       comparisons: comparisons,
@@ -66,9 +66,9 @@ class App extends Component {
     });
   }
 
-  getSelected(comparisons, id) {
+  getSelected(comparisons, selectedId) {
     comparisons.forEach((comparison) => {
-      if(comparison.id === id) {
+      if(comparison.id === selectedId) {
         return comparison;
       }
     });
@@ -79,7 +79,6 @@ class App extends Component {
 
   /** Check for stored stuff...If there's none, use a default. Always has at least one element. */
   establishComparisons() {
-    console.log('Establishing one or more comparisons...');
     let comparisons = locator.comparisonDao.getAll();
     if(comparisons.length <= 0) {
       locator.accountInitializer.initialize();
