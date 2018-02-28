@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.comparisonList {
+  background-color: #eee;
+}
+
+.comparisonForm {
+  background-color: #eee;
+}
+
 .drivetrainTitle a {
     text-decoration: none;
     color: gray;

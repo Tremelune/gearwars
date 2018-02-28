@@ -17,7 +17,7 @@ class Comparison extends Component {
   render() {
     let comparison = this.state.comparison;
     return (
-      <div>
+      <div className="comparisonForm">
         <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
 
         {comparison.drivetrains.map((drivetrain, index) =>
@@ -31,7 +31,6 @@ class Comparison extends Component {
             </div>
 
             <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-            <br />
           </div>
         )}
       </div>

@@ -21,9 +21,9 @@ export default class Persistence extends Component {
     return (
       <form>
         <div>
-          <b>Comparison:</b>
-          <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
-          <button onClick={this.save}>Rename</button>
+          <b>Comparison</b>
+          <button onClick={this.save}>Save</button><br/ >
+          Name: <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
         </div>
       </form>
     );

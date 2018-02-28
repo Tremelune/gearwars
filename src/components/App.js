@@ -44,6 +44,7 @@ class App extends Component {
 
         <Comparison comparison={comparison} setComparison={this.setComparison} />
 
+        <br />
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
 
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
