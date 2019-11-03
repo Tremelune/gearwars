@@ -10,6 +10,8 @@ class Chart extends Component {
    *
    * @props An array of at least one drivetrains:
    * {
+   *   maxRpm: 8000,
+   *   maxSpeed: 75,
    *   [
    *     drivetrain: {
    *       tireDiameter: 26, // Inches
@@ -19,8 +21,6 @@ class Chart extends Component {
    *     },
    *   ]
    * }
-   *
-   * todo should be {drivetrains: []}
    */
   constructor(props) {
     super(props);
@@ -29,6 +29,7 @@ class Chart extends Component {
 
 
   render() {
+    console.log('Rendering chart...');
     let lineColors = locator.chartRenderer.generateLineColors(this.props.drivetrains);
     let data = ChartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
     return (
@@ -43,8 +44,8 @@ class Chart extends Component {
         xTicks={20}
         yTicks={10}
         lineColors={lineColors}
-        xDomainRange={[0, 150]} // todo Make mutable in form. Lots of cars can break 150mph.
-        yDomainRange={[0, 8000]} // todo Make mutable in form. The Ariel Atom has a 10,500rpm redline.
+        xDomainRange={[0, this.props.maxSpeed]}
+        yDomainRange={[0, this.props.maxRpm]}
         data={data}
       />
     );
