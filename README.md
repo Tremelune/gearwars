@@ -1,8 +1,11 @@
 # gearwars
 A shitty gearing calculator
 
-# Run tests
+# run tests
 > npm test
 
-# Deploy
+# Run local
+> npm run start
+
+# deploy
 > npm run deploy
