@@ -39,6 +39,25 @@ export default class ChartRenderer {
   }
 
 
+  /** Gets highest redline within a comparison (to the nearest 1,000, rounded up). */
+  static calculateHighestRedliine(comparison) {
+    let max = 0
+
+    comparison.drivetrains.forEach(drivetrain => {
+      if(drivetrain.redline > max) {
+        max = drivetrain.redline
+      }
+    });
+
+    // Bump it up to the nearest thousand
+    let rounded = Math.ceil(max / 1000)
+    max = rounded * 1000
+    console.log('Calculated max RPM to ' + max)
+
+    return max;
+  }
+
+
   /** Generates line colors. One gradient per drivetrain. One color per gear. */
   generateLineColors(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().

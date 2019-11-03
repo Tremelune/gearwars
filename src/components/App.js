@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Chart from './Chart.js';
+import ChartRenderer from '../biz/ChartRenderer';
 import Comparison from './Comparison.js';
 import ComparisonList from './ComparisonList.js';
+import AxisForm from './AxisForm.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
 
@@ -14,6 +16,8 @@ class App extends Component {
     let currentComparison = comparisons[0];
 
     this.state = {
+      maxSpeed: 150,
+      maxRpm: ChartRenderer.calculateHighestRedliine(currentComparison),
       tireSize: '235/50-18',
       comparisons: comparisons,
       currentComparison: currentComparison,
@@ -23,13 +27,23 @@ class App extends Component {
 
   render() {
     let comparison = this.state.currentComparison;
-    let revolioWidth = Math.min(window.innerWidth, 400);
+    let revolioWidth = Math.min(window.innerWidth, 400); // Revolio is the minstrel in the graphic.
 
     return (
       <div className="App">
         <header>Gear vs Speed</header>
 
-        <Chart drivetrains={comparison.drivetrains} />
+        <Chart maxRpm={this.state.maxRpm} maxSpeed={this.state.maxSpeed} drivetrains={comparison.drivetrains} />
+
+        <AxisForm
+          maxRpm={this.state.maxRpm}
+          maxSpeed={this.state.maxSpeed}
+          setMaxRpm={this.setMaxRpm}
+          setMaxSpeed={this.setMaxSpeed} />
+        <br />
+
+        <TireForm tireSize={this.state.tireSize} />
+        <br />
 
         {this.state.comparisons.length > 0 &&
           <ComparisonList
@@ -39,9 +53,6 @@ class App extends Component {
             setComparison={this.setComparison}/>
         }
 
-        <TireForm tireSize={this.state.tireSize} />
-        <br />
-
         <Comparison comparison={comparison} setComparison={this.setComparison} />
 
         <br />
@@ -50,6 +61,17 @@ class App extends Component {
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
       </div>
     );
+  }
+
+
+  setMaxRpm = (maxRpm) => {
+    console.log('Setting max RPM to: ' + maxRpm);
+    this.setState({maxRpm: maxRpm});
+  }
+
+  setMaxSpeed = (maxSpeed) => {
+    console.log('Setting max speed to: ' + maxSpeed);
+    this.setState({maxSpeed: maxSpeed});
   }
 
   setComparison = (comparison) => {
