@@ -40,7 +40,7 @@ export default class ChartRenderer {
 
 
   /** Gets highest redline within a comparison (to the nearest 1,000, rounded up). */
-  static calculateHighestRedliine(comparison) {
+  static calculateHighestRedline(comparison) {
     let max = 0
 
     comparison.drivetrains.forEach(drivetrain => {

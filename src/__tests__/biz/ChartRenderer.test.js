@@ -47,6 +47,17 @@ test('calculate dimensions', () => {
 });
 
 
+test('get highest redline', () => {
+  let comparison = {
+    drivetrains: [
+      {redline: 4000},
+      {redline: 5001} // Make sure it rounds up, too
+    ]
+  }
+  expect(6000).toEqual(ChartRenderer.calculateHighestRedline(comparison));
+});
+
+
 test('calculate dimensions constrains to height', () => {
   let expected = {width: 1138, height: 640};
   let actual = ChartRenderer.calculateDimensions(8000, 800);
