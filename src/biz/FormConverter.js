@@ -30,10 +30,9 @@ export default class FormConverter {
   }
 
  /**
-  * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid. It also feels
-  * like it should very much be unit tested.
+  * Getting form values into an array is weird...I'm doing explicit conversion here. This feels stupid.
   *
-  * From: {redline: 6800, gear0: 1.1, gear2: 2.2}
+  * From: {redline: 6800, gear0: 1.1, gear1: 2.2}
   * To: {redline: 6800, gearRatios: [1.1, 2.2]}
   */
   static paramsToDrivetrain(params) {
@@ -44,9 +43,14 @@ export default class FormConverter {
     for (let key in params) {
       if (params.hasOwnProperty(key)) { // Don't include system params.
         if(key.startsWith(KEY_GEAR)) {
-          let split = key.split(KEY_GEAR);
-          let index = split[split.length - 1];
-          drivetrain.gearRatios[index] = params[key];
+          let ratio = params[key]
+
+          // Get rid of any empty strings...
+          if(ratio > 0) {
+            let split = key.split(KEY_GEAR);
+            let index = split[split.length - 1];
+            drivetrain.gearRatios[index] = ratio;
+          }
         } else {
           drivetrain[key] = params[key]; // Normal param...Copy it over.
         }
