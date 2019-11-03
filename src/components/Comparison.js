@@ -9,7 +9,8 @@ class Comparison extends Component {
   }
 
 
-  componentWillReceiveProps(props) {
+  // todo Update: https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState({comparison: props.comparison});
   }
 

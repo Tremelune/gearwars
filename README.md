@@ -5,7 +5,7 @@ A shitty gearing calculator
 > npm test
 
 # Run local
-> npm run start
+> npm start
 
 # deploy
 > npm run deploy

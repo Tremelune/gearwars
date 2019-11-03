@@ -11,8 +11,8 @@ export default class Persistence extends Component {
     this.state = {name: props.comparison.name};
   }
 
-
-  componentWillReceiveProps(props) {
+  // todo Update: https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState({name: props.comparison.name});
   }
 
