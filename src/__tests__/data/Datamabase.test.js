@@ -1,7 +1,6 @@
 import Datamabase from '../../data/Datamabase.js';
 
 test('test save new', () => {
-  console.log('##### test save new');
   let drivetrains = [
     {gearRatios: [4.236, 1]},
     {gearRatios: [2.538, 1]},
@@ -29,7 +28,6 @@ test('test save new', () => {
 
 
 test('test save existing', () => {
-  console.log('##### test save existing');
   let drivetrains = [
     {gearRatios: [4.236, 1]},
     {gearRatios: [2.538, 1]},
@@ -63,7 +61,6 @@ test('test save existing', () => {
 
 
 test('test delete', () => {
-  console.log('##### test delete');
   let a = {name: 'porsche'};
   let b = {name: 'bmw'};
   let c = {name: 'jeep'};
