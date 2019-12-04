@@ -7,10 +7,17 @@ import ComparisonList from './ComparisonList.js';
 import AxisForm from './AxisForm.js';
 import TireForm from './TireForm.js';
 import locator from '../biz/Locator.js';
+import ReactGA from 'react-ga';
+
+
+const ANALYTICS_ID = 'UA-2413562-9';
+
 
 class App extends Component {
   constructor() {
     super();
+
+    this.initAnalytics()
 
     let comparisons = this.establishComparisons();
     let currentComparison = comparisons[0];
@@ -24,8 +31,22 @@ class App extends Component {
     };
   }
 
+  // Initialize Google Analytics
+  // https://github.com/react-ga/react-ga
+  initAnalytics() {
+    let options = {
+      gaOptions: {
+        siteSpeedSampleRate: 100
+      }
+    };
+
+    ReactGA.initialize(ANALYTICS_ID, options);
+  }
+
 
   render() {
+    this.trackPageView()
+
     let comparison = this.state.currentComparison;
     let revolioWidth = Math.min(window.innerWidth, 400); // Revolio is the minstrel in the graphic.
 
@@ -61,6 +82,11 @@ class App extends Component {
         <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
       </div>
     );
+  }
+
+  // Track page view in analytics
+  trackPageView() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
 
