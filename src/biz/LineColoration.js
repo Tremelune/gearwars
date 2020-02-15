@@ -36,8 +36,10 @@ export default class LineColoration {
       last = this.getRandomColor();
     }
 
+    // Issue 9 - This just doesn't like to be below 1, so...
+    let end = Math.max(1, count - 1);
     this.rainbow.setSpectrum(first, last);
-    this.rainbow.setNumberRange(0, count - 1);
+    this.rainbow.setNumberRange(0, end);
 
     let colors = [];
     for(let i=0; i<count; i++) {

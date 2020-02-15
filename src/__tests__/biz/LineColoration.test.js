@@ -19,3 +19,10 @@ test('randoms', () => {
   let gradient = underTest.generateGradient(10,10);
   expect(gradient.length).toBe(10);
 });
+
+// Issue 9 - Make sure this doesn't explode with no gears to display.
+test('gearless', () => {
+  let expected = [];
+  let actual = underTest.generateGradient(0,0);
+  expect(actual).toEqual(expected);
+});
