@@ -1,11 +1,16 @@
 # gearwars
 A shitty gearing calculator
 
+# setup
+Install Node.js and NPM (`brew install node`), then:
+
+`$ npm install`
+
 # run tests
-> npm test
+`$ npm test`
 
-# Run local
-> npm start
+# run local
+`$ npm start`
 
-# deploy
-> npm run deploy
+# production release
+`$ npm run deploy`
