@@ -40,6 +40,27 @@ test('build data from drivetrains', () => {
 });
 
 
+// Issue 9.
+test('build data from drivetrains with "holes"', () => {
+  let drivetrains = [
+    {
+      tireDiameter: 10,
+      finalDrive: 1,
+      gearRatios: [null, 2],
+      redline: 1000,
+    },
+  ];
+
+  let expected = [
+    [{"x": 0, "y": 0}, {"x": Infinity, "y": 1000}],
+    [{"x": 0, "y": 0}, {"x": 15, "y": 1000}],
+  ];
+
+  let actual = ChartRenderer.buildDataFromDrivetrains(drivetrains);
+  expect(actual).toEqual(expected);
+});
+
+
 test('calculate dimensions', () => {
   let expected = {width: 800, height: 450};
   let actual = ChartRenderer.calculateDimensions(800, 800);

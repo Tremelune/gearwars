@@ -80,10 +80,18 @@ export default class ChartRenderer {
   * ]
   */
   static toData(drivetrain) {
-    return drivetrain.gearRatios.map((gearRatio, index) => {
-      let speed =
-        GearingCalculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
-      return [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
-    });
+    // Using map() here caused weird behavior when gearRatio values were null, so...forEach.
+    let rows = []
+
+    drivetrain.gearRatios.forEach((gearRatio, index) => {
+         let speed =
+             GearingCalculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
+
+         let row = [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
+
+         rows.push(row)
+     })
+
+     return rows
   }
 }
