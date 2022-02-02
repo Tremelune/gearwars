@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import locator from '../biz/Locator.js';
 import Form from './Form.js';
 import Persistence from './Persistence.js';
 
@@ -22,19 +23,26 @@ class Comparison extends Component {
         <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
 
         <div className="drivetrains">
-          {comparison.drivetrains.map((drivetrain, index) =>
-            <div className="drivetrain" key={index}>
-              <div className="drivetrainTitle">
-                <b>Drivetrain {index + 1}</b>
-                <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
-                {comparison.drivetrains.length > 1 &&
-                  <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
-                }
-              </div>
+          {comparison.drivetrains.map((drivetrain, index) => {
+            // Match color of drivetrain to corresponding chart lines. Color is determined by
+            // the order of drivetrains, and we only need one.
+            let colors = locator.lineColoration.generateGradient(index, 1);
+            let style = {color: colors[0]}; // The first color is the "real" one.
 
-              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-            </div>
-          )}
+            return (
+              <div className="drivetrain" key={index}>
+                <div className="drivetrainTitle">
+                  <b style={style}>Drivetrain {index + 1}</b>
+                  <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
+                  {comparison.drivetrains.length > 1 &&
+                    <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
+                  }
+                </div>
+
+                <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+              </div>
+            )
+          })}
         </div>
       </div>
     );
