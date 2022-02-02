@@ -74,6 +74,14 @@ class Chart extends Component {
       layout: {
         padding: 20
       },
+      animation: {
+        duration: 0
+      },
+      elements: {
+        point:{
+            radius: 0
+        }
+      },
     }
 
     let data = {
