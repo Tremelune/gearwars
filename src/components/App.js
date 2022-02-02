@@ -23,7 +23,7 @@ class App extends Component {
     let currentComparison = comparisons[0];
 
     this.state = {
-      maxSpeed: 150,
+      maxSpeed: 120,
       maxRpm: ChartRenderer.calculateHighestRedline(currentComparison),
       tireSize: '235/50-18',
       comparisons: comparisons,
