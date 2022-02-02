@@ -53,6 +53,14 @@ class Chart extends Component {
     let datasets = locator.chartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
 
     let options = {
+      scales: {
+        x: {
+          max: this.props.maxSpeed,
+        },
+        y: {
+          max: this.props.maxRpm,
+        },
+      },
       plugins: {
         legend: {
           display: false,
