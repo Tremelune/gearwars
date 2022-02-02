@@ -79,7 +79,10 @@ class App extends Component {
         <br />
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
 
-        <div>Built by Tremelune: <a href="https://github.com/Tremelune/gearwars">GitHub</a></div>
+        <div>
+          Built by <a href="https://www.instagram.com/raidenmotors/">Raiden Motors</a><br/>
+          <a href="https://github.com/Tremelune/gearwars">(GitHub)</a>
+        </div>
       </div>
     );
   }
