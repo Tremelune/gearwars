@@ -10,10 +10,22 @@
   background-color: #eee;
 }
 
+.drivetrains {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drivetrain {
+  background-color: #ddd;
+  margin: .2em;
+  padding: .5em
+}
+
 .drivetrainTitle a {
-    text-decoration: none;
-    color: gray;
-    font-size: small;
+  text-decoration: none;
+  color: gray;
+  font-size: small;
 }
 
 .comparisonList a {

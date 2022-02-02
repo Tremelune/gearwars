@@ -21,19 +21,21 @@ class Comparison extends Component {
       <div className="comparisonForm">
         <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
 
-        {comparison.drivetrains.map((drivetrain, index) =>
-          <div key={index}>
-            <div className="drivetrainTitle">
-              <b>Drivetrain {index + 1}</b>
-              <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
-              {comparison.drivetrains.length > 1 &&
-                <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
-              }
-            </div>
+        <div className="drivetrains">
+          {comparison.drivetrains.map((drivetrain, index) =>
+            <div className="drivetrain" key={index}>
+              <div className="drivetrainTitle">
+                <b>Drivetrain {index + 1}</b>
+                <a onClick={(e) => this.duplicateDrivetrain(index)}>(duplicate)</a>
+                {comparison.drivetrains.length > 1 &&
+                  <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
+                }
+              </div>
 
-            <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-          </div>
-        )}
+              <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+            </div>
+          )}
+        </div>
       </div>
     );
   }
