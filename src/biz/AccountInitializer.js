@@ -6,22 +6,58 @@ export default class AccountInitializer {
 
 
   initialize() {
-    let comparison = this.buildInitialComparison();
-    this.comparisonDao.save(comparison);
-  }
+    let drivetrainsA = [
+      {
+        name: "Stock Rear gears",
+        tireDiameter: 27.3, // Inches
+        finalDrive: 3.31,
+        gearRatios: [4.24, 2.54, 1.67, 1.24, 1, 0.7],
+        redline: 6800,
+      },
+      {
+        name: "Tall Rear Gears",
+        tireDiameter: 27.3, // Inches
+        finalDrive: 4.11,
+        gearRatios: [4.24, 2.54, 1.67, 1.24, 1, 0.7],
+        redline: 6800,
+      },
+    ];
 
-  buildInitialComparison() {
-    let drivetrains = [{
-      name: "2015 EcoBoost Mustang",
-      tireDiameter: 27.3, // Inches
-      finalDrive: 3.31,
-      gearRatios: [4.236, 2.538, 1.665, 1.238, 1, 0.704],
-      redline: 6800,
-    }];
-
-    return {
-      name: 'Default',
-      drivetrains: drivetrains,
+    let comparisonA = {
+      name: '2015 EcoBoost Mustang',
+      drivetrains: drivetrainsA,
     }
+
+    let drivetrainsB = [
+      {
+        name: "Tesla Model S Front Motor",
+        tireDiameter: 27.7, // Inches
+        finalDrive: 1,
+        gearRatios: [9.34],
+        redline: 18000,
+      },
+      {
+        name: "Tesla Model S Rear Motor",
+        tireDiameter: 27.7, // Inches
+        finalDrive: 1,
+        gearRatios: [9.71],
+        redline: 18000,
+      },
+      {
+        name: "Porsche Taycan Rear Motor",
+        tireDiameter: 28.7, // Inches
+        finalDrive: 1,
+        gearRatios: [15.1, 8.05],
+        redline: 16000,
+      },
+    ];
+
+    let comparisonB = {
+      name: 'EVs',
+      drivetrains: drivetrainsB,
+    }
+
+    this.comparisonDao.save(comparisonA);
+    this.comparisonDao.save(comparisonB);
   }
 }
