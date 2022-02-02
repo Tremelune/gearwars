@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ChartRenderer from '../biz/ChartRenderer.js';
-import locator from '../biz/Locator.js'
+import locator from '../biz/Locator.js';
 import {
   Chart as ChartJS,
   CategoryScale,
