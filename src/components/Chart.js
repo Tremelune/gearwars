@@ -55,10 +55,15 @@ class Chart extends Component {
     let options = {
       scales: {
         x: {
-          max: this.props.maxSpeed,
+          // If we don't floor, you get labels like '150.0000000000000'
+          max: Math.floor(this.props.maxSpeed),
+          ticks: {
+            stepSize: 10,
+          }
         },
         y: {
-          max: this.props.maxRpm,
+          // If we don't floor, you get labels like '8,500.0000000000000'
+          max: Math.floor(this.props.maxRpm),
         },
       },
       plugins: {
