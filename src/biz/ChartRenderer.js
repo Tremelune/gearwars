@@ -46,23 +46,6 @@ export default class ChartRenderer {
   }
 
 
-  static calculateDimensions(windowWidth, windowHeight) {
-    let width = windowWidth;
-    let height = Math.round(width * 9 / 16); // Arbitrary aspect ratio...
-
-    let reasonableMaxHeight = windowHeight * 0.8;
-    if(height > reasonableMaxHeight) {
-      height = reasonableMaxHeight;
-      width = Math.round(height * 16 / 9);
-    }
-
-    return {
-      width: width,
-      height: height,
-    }
-  }
-
-
   /** Gets highest redline within a comparison (to the nearest 1,000, rounded up). */
   static calculateHighestRedline(comparison) {
     let max = 0

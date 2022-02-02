@@ -44,8 +44,6 @@ class Chart extends Component {
       Tooltip,
       Legend
     );
-
-    this.state = this.calculateDimensions();
   }
 
 
@@ -89,27 +87,13 @@ class Chart extends Component {
     }
 
     return (
+      <div className="chart">
         <Scatter
           options={options}
           data={data}
         />
+      </div>
     );
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  handleResize = () => {
-    this.setState(this.calculateDimensions());
-  }
-
-  calculateDimensions() {
-    return ChartRenderer.calculateDimensions(window.innerWidth, window.innerHeight)
   }
 }
 
