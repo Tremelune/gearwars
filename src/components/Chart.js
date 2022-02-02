@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import {LineChart} from 'react-easy-chart';
 import ChartRenderer from '../biz/ChartRenderer.js';
 import locator from '../biz/Locator.js'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import {Scatter} from 'react-chartjs-2';
 
-/** Uses this library: https://rma-consulting.github.io/react-easy-chart/line-chart/index.html */
+/** Uses Chart.js and react-chartjs-2. */
 class Chart extends Component {
   /**
    * todo Drivetrain should probably be a class...immutable...
@@ -24,30 +34,57 @@ class Chart extends Component {
    */
   constructor(props) {
     super(props);
+
+    ChartJS.register(
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      LineElement,
+      Title,
+      Tooltip,
+      Legend
+    );
+
     this.state = this.calculateDimensions();
   }
 
 
   render() {
-    console.log('Rendering chart...');
-    let lineColors = locator.chartRenderer.generateLineColors(this.props.drivetrains);
-    let data = ChartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
+    let datasets = locator.chartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
+
+    let options = {
+      scales: {
+        x: {
+          // If we don't floor, you get labels like '150.0000000000000'
+          max: Math.floor(this.props.maxSpeed),
+          ticks: {
+            stepSize: 10,
+          }
+        },
+        y: {
+          // If we don't floor, you get labels like '8,500.0000000000000'
+          max: Math.floor(this.props.maxRpm),
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      layout: {
+        padding: 20
+      },
+    }
+
+    let data = {
+      datasets: datasets,
+    }
+
     return (
-      <LineChart
-        grid
-        verticalGrid
-        axes
-        axisLabels={{x: 'mph', y: 'rpm'}}
-        width={this.state.width}
-        height={this.state.height}
-        margin={{top: 10, right: 10, bottom: 30, left: 40}}
-        xTicks={20}
-        yTicks={10}
-        lineColors={lineColors}
-        xDomainRange={[0, this.props.maxSpeed]}
-        yDomainRange={[0, this.props.maxRpm]}
-        data={data}
-      />
+        <Scatter
+          options={options}
+          data={data}
+        />
     );
   }
 

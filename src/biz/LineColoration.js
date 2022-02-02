@@ -43,7 +43,8 @@ export default class LineColoration {
 
     let colors = [];
     for(let i=0; i<count; i++) {
-      colors.push(this.rainbow.colourAt(i)); // Dirty non-American!
+      let color = '#' + this.rainbow.colourAt(i);
+      colors.push(color); // Dirty non-American!
     }
 
     return colors;

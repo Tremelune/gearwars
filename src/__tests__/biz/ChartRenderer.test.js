@@ -1,4 +1,6 @@
+import { assert } from 'console';
 import ChartRenderer from '../../biz/ChartRenderer.js';
+const util = require('util')
 
 test('generate line colors', () => {
   let drivetrains = [
@@ -30,12 +32,28 @@ test('build data from drivetrains', () => {
   ];
 
   let expected = [
-    [{"x": 0, "y": 0}, {"x": 39, "y": 6800}],
-    [{"x": 0, "y": 0}, {"x": 35, "y": 6200}],
-    [{"x": 0, "y": 0}, {"x": 58, "y": 6200}],
+    {
+      showLine: true,
+      backgroundColor: '000000',
+      borderColor: '000000',
+      data: [{"x": 0, "y": 0}, {"x": 39, "y": 6800}],
+    },
+    {
+      showLine: true,
+      backgroundColor: '000000',
+      borderColor: '000000',
+      data: [{"x": 0, "y": 0}, {"x": 35, "y": 6200}],
+    },
+    {
+      showLine: true,
+      backgroundColor: 'ffffff',
+      borderColor: 'ffffff',
+      data: [{"x": 0, "y": 0}, {"x": 58, "y": 6200}],
+    },
   ];
 
-  let actual = ChartRenderer.buildDataFromDrivetrains(drivetrains);
+  let underTest = new ChartRenderer(new MockColoration());
+  let actual = underTest.buildDataFromDrivetrains(drivetrains);
   expect(actual).toEqual(expected);
 });
 
@@ -52,11 +70,22 @@ test('build data from drivetrains with "holes"', () => {
   ];
 
   let expected = [
-    [{"x": 0, "y": 0}, {"x": Infinity, "y": 1000}],
-    [{"x": 0, "y": 0}, {"x": 15, "y": 1000}],
+    {
+      showLine: true,
+      backgroundColor: '000000',
+      borderColor: '000000',
+      data: [{"x": 0, "y": 0}, {"x": Infinity, "y": 1000}],
+    },
+    {
+      showLine: true,
+      backgroundColor: 'ffffff',
+      borderColor: 'ffffff',
+      data: [{"x": 0, "y": 0}, {"x": 15, "y": 1000}],
+    },
   ];
 
-  let actual = ChartRenderer.buildDataFromDrivetrains(drivetrains);
+  let underTest = new ChartRenderer(new MockColoration());
+  let actual = underTest.buildDataFromDrivetrains(drivetrains);
   expect(actual).toEqual(expected);
 });
 
