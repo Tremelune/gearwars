@@ -51,9 +51,6 @@ class Chart extends Component {
 
   render() {
     let datasets = locator.chartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
-    datasets.forEach((dset, index) => {
-      console.info('DATER' + index, dset);
-    });
 
     let options = {
       plugins: {
@@ -62,12 +59,11 @@ class Chart extends Component {
         },
       },
       layout: {
-        padding: 100
+        padding: 20
       },
     }
 
     let data = {
-      labels: [0, 39, 66, 100, 237],
       datasets: datasets,
     }
 
