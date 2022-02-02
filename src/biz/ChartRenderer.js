@@ -8,16 +8,40 @@ export default class ChartRenderer {
 
  /**
   * Converts drivetrains to chart data, and combines them in a single array. The data structure matches that used by
-  * our chart library in Chart.js.
+  * Chart.js:
+  * 
+  * [
+  *   {
+  *     showLine: true,
+  *     backgroundColor: '#0000ff',
+  *     borderColor: '#0000ff',
+  *     data: [{x: 0, y:0}, {x: 30, y: 6000}]
+  *   },
+  *   {
+  *     showLine: true,
+  *     backgroundColor: '#0000ee',
+  *     borderColor: '#0000ee',
+  *     data: [{x: 0, y:0}, {x: 60, y: 6000}]
+  *   },
+  *   {
+  *     showLine: true,
+  *     backgroundColor: '#0000ff',
+  *     borderColor: '#0000ff',
+  *     data: [{x: 0, y:0}, {x: 70, y: 6800}]
+  *   },
+  * ]
   */
-  static buildDataFromDrivetrains(drivetrains) {
+  buildDataFromDrivetrains(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
+
     drivetrains.forEach((drivetrain, index) => {
-      let data = this.toData(drivetrain);
-      Array.prototype.push.apply(combinedData, data);
+      let colors = this.lineColoration.generateGradient(index, drivetrain.gearRatios.length)
+      let dataset = this.toDataset(drivetrain, colors);
+      Array.prototype.push.apply(combinedData, dataset);
       return null;
     })
+
     return combinedData;
   }
 
@@ -62,36 +86,44 @@ export default class ChartRenderer {
   generateLineColors(drivetrains) {
     // This seems a bit weird, but I didn't know how to append in a map().
     let gradients = [];
+
     drivetrains.forEach((drivetrain, index) => {
       let count = drivetrain.gearRatios.length;
       let gradient = this.lineColoration.generateGradient(index, count)
       Array.prototype.push.apply(gradients, gradient);
       return null;
     })
+
     return gradients;
   }
 
 
- /**
-  * Converts data into format easily chartable by Chart:
-  * [
-  *   [{x: 0, y: 0}, {x: 200, y: 6800}],
-  *   [{x: 0, y: 0}, {x: 150, y: 6800}]
-  * ]
-  */
-  static toData(drivetrain) {
+ /** Converts data into format easily chartable by Chart.js. */
+  toDataset(drivetrain, colors) {
     // Using map() here caused weird behavior when gearRatio values were null, so...forEach.
     let rows = []
 
     drivetrain.gearRatios.forEach((gearRatio, index) => {
-         let speed =
-             GearingCalculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
-
-         let row = [{x: 0, y: 0}, {x: speed, y: drivetrain.redline}];
-
-         rows.push(row)
-     })
+      let row = ChartRenderer.toDatasetRow(drivetrain, gearRatio, colors[index])
+      rows.push(row)
+    })
 
      return rows
+  }
+
+
+  static toDatasetRow(drivetrain, gearRatio, color) {
+    let speed =
+      GearingCalculator.speed(drivetrain.tireDiameter, drivetrain.finalDrive, gearRatio, drivetrain.redline);
+
+    return {
+      showLine: true,
+      backgroundColor: color,
+      borderColor: color,
+      data: [
+        { x: 0, y: 0 },
+        { x: speed, y: drivetrain.redline },
+      ]
+    };
   }
 }
