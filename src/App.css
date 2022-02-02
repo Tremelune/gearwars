@@ -28,6 +28,14 @@
   font-size: small;
 }
 
+.gearRatios {
+  display: flex;
+}
+
+.drivetrainInput {
+  width: 7ch;
+}
+
 .comparisonList a {
     text-decoration: none;
 }
