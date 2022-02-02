@@ -35,30 +35,33 @@ export default class Form extends Component {
         <div className="gearRatios">
           <div>Gear Ratios</div>
           <table>
-            <tr>
-              <td>1</td>
-              <td><input className="drivetrainInput" name="gear0" type="number" value={this.state.gear0} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><input className="drivetrainInput" name="gear1" type="number" value={this.state.gear1} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><input className="drivetrainInput" name="gear2" type="number" value={this.state.gear2} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><input className="drivetrainInput" name="gear3" type="number" value={this.state.gear3} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td><input className="drivetrainInput" name="gear4" type="number" value={this.state.gear4} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td><input className="drivetrainInput" name="gear5" type="number" value={this.state.gear5} onChange={onChange} /></td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><input className="drivetrainInput" name="gear0" type="number" value={this.state.gear0} onChange={onChange} /></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><input className="drivetrainInput" name="gear1" type="number" value={this.state.gear1} onChange={onChange} /></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><input className="drivetrainInput" name="gear2" type="number" value={this.state.gear2} onChange={onChange} /></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><input className="drivetrainInput" name="gear3" type="number" value={this.state.gear3} onChange={onChange} /></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><input className="drivetrainInput" name="gear4" type="number" value={this.state.gear4} onChange={onChange} /></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><input className="drivetrainInput" name="gear5" type="number" value={this.state.gear5} onChange={onChange} /></td>
+              </tr>
+            </tbody>
+            
           </table>
         </div>
       </form>
