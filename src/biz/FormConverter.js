@@ -21,9 +21,23 @@ export default class FormConverter {
     }
 
     // Turn the array of gears into individual key/value pairs.
-    for(let i=0; i<drivetrain.gearRatios.length; i++) {
+    for (let i = 0; i < 6; i++) {
       let key = KEY_GEAR + i;
-      params[key] = drivetrain.gearRatios[i];
+
+      // React uses shallow merging when setting state, such that if gear5 has a value, but no gear5
+      // is explicitly specified, the gear5 value from the previous state will live on. You wind up
+      // with ghost gears from one comparison to the next.
+      //
+      // When we convert a drivetrain to a form param, we need to make sure that we explicitly include
+      // every form field (gear5, gear4, etc), even if there is no value in the drivetrain. This will
+      // ensure the values in teh form that aren't in the drivetrain are blanked out.
+      //
+      // This will cause problems if we ever make the number of gear ratio fields dynamic.
+      if (i < drivetrain.gearRatios.length) {
+        params[key] = drivetrain.gearRatios[i];
+      } else {
+        params[key] = '';
+      }
     }
 
     return params;
