@@ -123,11 +123,11 @@ class App extends Component {
   }
 
   getSelected(comparisons, selectedId) {
-    comparisons.forEach((comparison) => {
+    for (const comparison of comparisons) {
       if(comparison.id === selectedId) {
         return comparison;
       }
-    });
+    }
 
     return comparisons[0];
   }
