@@ -3,8 +3,8 @@ import locator from '../biz/Locator.js';
 
 export default class Persistence extends Component {
  /**
-  * Props:
   * @param comparison The current comparison.
+  * @function reloadSavedComparisons Refreshes comparison list.
   */
   constructor(props) {
     super(props);
@@ -39,9 +39,11 @@ export default class Persistence extends Component {
   }
 
 
-  save = () => {
+  save = (event) => {
+    event.preventDefault();
     let comparison = this.props.comparison;
     comparison.name = this.state.name;
     locator.comparisonDao.save(comparison);
+    this.props.reloadSavedComparisons(comparison.id);
   }
 }

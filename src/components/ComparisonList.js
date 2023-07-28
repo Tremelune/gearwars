@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import locator from '../biz/Locator.js';
 
+/**
+ * @param comparisons - List of comparisons.
+ * @param selectedId - ID of currently selected comparison.
+ * @function reloadSavedComparisons - Refreshes the comparison list.
+ * @function setComparison - Changes the comparison ID.
+ */
 export default class ComparisonList extends Component {
   render() {
     return (
