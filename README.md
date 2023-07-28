@@ -21,3 +21,4 @@ Then run the "Chrome" debug tast in VS Code. It's defined in launch.json
 
 # production release
 `$ npm run deploy`
+It may take like ten minutes to propogate once complete...
