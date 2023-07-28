@@ -4,6 +4,11 @@ import Form from './Form.js';
 import Persistence from './Persistence.js';
 
 class Comparison extends Component {
+  /**
+   * @param comparison Comparison to display.
+   * @function setComparison Sets the comparison to display.
+   * @function reloadSavedComparisons Reloads comparison list.
+   */
   constructor(props) {
     super(props);
     this.state = {comparison: props.comparison};
@@ -20,7 +25,11 @@ class Comparison extends Component {
     let comparison = this.state.comparison;
     return (
       <div className="comparisonForm">
-        <Persistence comparison={comparison} hasSaved={this.props.hasSaved} setComparison={this.setComparison} />
+        <Persistence
+          comparison={comparison}
+          hasSaved={this.props.hasSaved}
+          setComparison={this.setComparison}
+          reloadSavedComparisons={this.props.reloadSavedComparisons}/>
 
         <div className="drivetrains">
           {comparison.drivetrains.map((drivetrain, index) => {

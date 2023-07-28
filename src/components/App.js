@@ -74,7 +74,10 @@ class App extends Component {
             setComparison={this.setComparison}/>
         }
 
-        <Comparison comparison={comparison} setComparison={this.setComparison} />
+        <Comparison
+          comparison={comparison}
+          setComparison={this.setComparison}
+          reloadSavedComparisons={this.reloadSavedComparisons}/>
 
         <br />
         <img src={"/revolio.png"} width={revolioWidth} alt="Revolio Clockberg Jr playing a string instrument" />
@@ -112,9 +115,10 @@ class App extends Component {
     let comparisons = this.establishComparisons();
     console.log('Selecting ' + selectedId + ' from:', comparisons);
 
+    let current = this.getSelected(comparisons, selectedId);
     this.setState({
       comparisons: comparisons,
-      currentComparison: this.getSelected(comparisons, selectedId),
+      currentComparison: current,
     });
   }
 
