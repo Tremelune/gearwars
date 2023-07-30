@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import locator from '../biz/Locator.js';
 import Form from './Form.js';
 import Persistence from './Persistence.js';
+import { HexColorPicker } from "react-colorful";
 
 class Comparison extends Component {
   /**
@@ -33,10 +34,8 @@ class Comparison extends Component {
 
         <div className="drivetrains">
           {comparison.drivetrains.map((drivetrain, index) => {
-            // Match color of drivetrain to corresponding chart lines. Color is determined by
-            // the order of drivetrains, and we only need one.
-            let colors = locator.lineColoration.generateGradient(index, 1);
-            let style = {color: colors[0]}; // The first color is the "real" one.
+            let color = this.findColor(drivetrain, index);
+            let style = {color: color}; // The first color is the "real" one.
             let hidden = drivetrain.hidden == true;
 
             return (
@@ -57,12 +56,36 @@ class Comparison extends Component {
                 </div>
 
                 <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
+                <HexColorPicker color={color} onChange={this.setColor} />
               </div>
             )
           })}
         </div>
       </div>
     );
+  }
+
+
+  /**
+   * Finds color for a drivetrain. If no color has been manually assigned, it will generate one.
+   * 
+   * @param drivetrain Drivetrain to determine the color for.
+   * @param index Index of drivetrain in the list of comparisons for this component.
+   * @returns Hex value of color: "ff004a"
+   */
+  findColor = (drivetrain, index) => {
+    if(drivetrain.color) {
+      return drivetrain.color;
+    } else {
+      let colors = locator.lineColoration.generateGradient(index, 1);
+      // We have a gradient, so choose the "primary" color...which is the first.
+      return colors[0];
+    }
+  }
+
+  // Callback for color picker.
+  setColor = (color) => {
+    console.log(color)
   }
 
 
