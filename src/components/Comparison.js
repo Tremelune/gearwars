@@ -56,7 +56,7 @@ class Comparison extends Component {
                 </div>
 
                 <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
-                <HexColorPicker color={color} onChange={this.setColor} />
+                <HexColorPicker color={color} onChange={(color) => this.setColor(color, drivetrain)} />
               </div>
             )
           })}
@@ -84,8 +84,11 @@ class Comparison extends Component {
   }
 
   // Callback for color picker.
-  setColor = (color) => {
-    console.log(color)
+  setColor = (color, drivetrain) => {
+    drivetrain.color = color;
+    // Update comparisons...Gotta be a better way to do this...
+    let comparison = this.state.comparison;
+    this.setComparison(comparison)
   }
 
 
