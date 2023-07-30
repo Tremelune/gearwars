@@ -37,8 +37,14 @@ export default class ChartRenderer {
 
     drivetrains.forEach((drivetrain, index) => {
       let colors = this.lineColoration.generateGradient(index, drivetrain.gearRatios.length)
-      let dataset = this.toDataset(drivetrain, colors);
-      Array.prototype.push.apply(combinedData, dataset);
+      
+      // We don't want the colors to change if a drivetrain is hidden, so we check after colors have
+      // been generated
+      if(drivetrain.hidden != true) {
+        let dataset = this.toDataset(drivetrain, colors);
+        Array.prototype.push.apply(combinedData, dataset);
+      }
+      
       return null;
     })
 
