@@ -37,8 +37,7 @@ class Comparison extends Component {
             // the order of drivetrains, and we only need one.
             let colors = locator.lineColoration.generateGradient(index, 1);
             let style = {color: colors[0]}; // The first color is the "real" one.
-            // todo
-            // let hidden = React.useState(false);
+            let hidden = drivetrain.hidden == true;
 
             return (
               <div className="drivetrain" key={index}>
@@ -52,6 +51,7 @@ class Comparison extends Component {
                 <div>
                   <input
                     type="checkbox"
+                    checked={hidden}
                     onChange={(e) => this.toggleVisibility(index)}/>
                   Hidden
                 </div>
