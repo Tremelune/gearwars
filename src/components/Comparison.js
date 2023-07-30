@@ -37,6 +37,7 @@ class Comparison extends Component {
             // the order of drivetrains, and we only need one.
             let colors = locator.lineColoration.generateGradient(index, 1);
             let style = {color: colors[0]}; // The first color is the "real" one.
+            let hidden = drivetrain.hidden == true;
 
             return (
               <div className="drivetrain" key={index}>
@@ -46,6 +47,13 @@ class Comparison extends Component {
                   {comparison.drivetrains.length > 1 &&
                     <a onClick={(e) => this.removeDrivetrain(index)}>(remove)</a>
                   }
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={hidden}
+                    onChange={(e) => this.toggleVisibility(index)}/>
+                  Hidden
                 </div>
 
                 <Form id={index} drivetrain={drivetrain} update={this.setDrivetrain} />
@@ -85,7 +93,15 @@ class Comparison extends Component {
     this.setComparison(comparison);
   }
 
+  toggleVisibility = (index) => {
+    let comparison = this.state.comparison;
+    let drivetrain = comparison.drivetrains[index];
+    drivetrain.hidden = !drivetrain.hidden;
+    this.setComparison(comparison);
+  }
 
+
+  /** Triggers a re-draw */
   setComparison = (comparison) => {
     this.setState({comparison: comparison});
     this.props.setComparison(comparison);
