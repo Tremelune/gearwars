@@ -36,7 +36,7 @@ export default class LineColoration {
     // Create a gradient between the primary color and pure white. The count of steps provides
     // resolution. We arbitrarily choose a step near pure white that still has enough of the color
     // in it to be visible while still providing visual differences between gear ratios line colors.
-    let count = 2;
+    let count = 3;
     this.rainbow.setSpectrum(primary, "#ffffff");
     this.rainbow.setNumberRange(0, count);
     let colors = this.buildColorArray(count);
