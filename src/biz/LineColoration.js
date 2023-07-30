@@ -1,12 +1,3 @@
-const GRADIENT_RANGES = [
-  {first: '#0000dd', last: '#ccccff'},
-  {first: '#dd0000', last: '#ffcccc'},
-  {first: '#00aa00', last: '#ccffcc'},
-  {first: '#aa00aa', last: '#ffccff'},
-  {first: '#ff8800', last: '#ffffcc'},
-];
-
-
 export default class LineColoration {
   constructor() {
     // Pulled from: https://github.com/anomal/RainbowVis-JS/
@@ -16,39 +7,52 @@ export default class LineColoration {
 
 
  /**
-  * Generates a gradient of hex values.
+  * Generates a gradient of hex values, from the primary color to a lighter version.
   *
-  * @param index Which gradient color scheme to use (drivetrain form index works).
-  * @param count Number of steps in the gradient (drivetrain count). The first five gradients are hardcoded. Subsequent
-  * gradients are generated at random.
-  * @return Array of hex colors: [#000000, #aaaaaa, #ffffff, ...]
+  * @param primary Primary color to construct fading gradient from.
+  * @param count Number of steps in the gradient (gear ratio count).
+  * @return Array of hex colors: ["#000000", "#aaaaaa", "#ffffff", ...]
   */
-  generateGradient(index, count) {
-    // We have some hard-coded colors...but if someone wants more, just give 'em something random...
-    let first;
-    let last;
-    if(index < GRADIENT_RANGES.length) {
-      let range = GRADIENT_RANGES[index];
-      first = range.first;
-      last = range.last;
-    } else {
-      first = this.getRandomColor();
-      last = this.getRandomColor();
-    }
+  generateGradient(primary, count) {
+    let last = this.generateEndColor(primary);
 
     // Issue 9 - This just doesn't like to be below 1, so...
     let end = Math.max(1, count - 1);
-    this.rainbow.setSpectrum(first, last);
+
+    // There is the potential for a race condition here, but not until we have a billion users...
+    this.rainbow.setSpectrum(primary, last);
     this.rainbow.setNumberRange(0, end);
 
+    return this.buildColorArray(count);
+  }
+
+
+  /**
+   * Generates reasonable ending color for gradient. We choose a lighter version of the primary.
+   * 
+   * @param primary Color to base the final color on.
+   */
+  generateEndColor(primary) {
+    // Create a gradient between the primary color and pure white. The count of steps provides
+    // resolution. We arbitrarily choose a step near pure white that still has enough of the color
+    // in it to be visible while still providing visual differences between gear ratios line colors.
+    let count = 2;
+    this.rainbow.setSpectrum(primary, "#ffffff");
+    this.rainbow.setNumberRange(0, count);
+    let colors = this.buildColorArray(count);
+    return colors[count - 1];
+  }
+
+
+  buildColorArray(count) {
     let colors = [];
     for(let i=0; i<count; i++) {
       let color = '#' + this.rainbow.colourAt(i);
-      colors.push(color); // Dirty non-American!
+      colors.push(color);
     }
-
     return colors;
   }
+
 
   // When this is static, the tests fail. It doesn't need to be static, so I'm inclined not to worry about it.
   // Pulled from: https://stackoverflow.com/questions/1484506/random-color-generator

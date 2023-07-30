@@ -32,20 +32,13 @@ export default class ChartRenderer {
   * ]
   */
   buildDataFromDrivetrains(drivetrains) {
-    // This seems a bit weird, but I didn't know how to append in a map().
     let combinedData = [];
 
-    drivetrains.forEach((drivetrain, index) => {
-      let colors = this.lineColoration.generateGradient(index, drivetrain.gearRatios.length)
-      
-      // We don't want the colors to change if a drivetrain is hidden, so we check after colors have
-      // been generated
-      if(drivetrain.hidden != true) {
-        let dataset = this.toDataset(drivetrain, colors);
-        Array.prototype.push.apply(combinedData, dataset);
-      }
-      
-      return null;
+    drivetrains.forEach((drivetrain) => {
+      let count = drivetrain.gearRatios.length;
+      let colors = this.lineColoration.generateGradient(drivetrain.color, count)
+      let dataset = this.toDataset(drivetrain, colors);
+      Array.prototype.push.apply(combinedData, dataset);
     })
 
     return combinedData;
@@ -68,22 +61,6 @@ export default class ChartRenderer {
     console.log('Calculated max RPM to ' + max)
 
     return max;
-  }
-
-
-  /** Generates line colors. One gradient per drivetrain. One color per gear. */
-  generateLineColors(drivetrains) {
-    // This seems a bit weird, but I didn't know how to append in a map().
-    let gradients = [];
-
-    drivetrains.forEach((drivetrain, index) => {
-      let count = drivetrain.gearRatios.length;
-      let gradient = this.lineColoration.generateGradient(index, count)
-      Array.prototype.push.apply(gradients, gradient);
-      return null;
-    })
-
-    return gradients;
   }
 
 
