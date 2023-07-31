@@ -35,10 +35,12 @@ export default class ChartRenderer {
     let combinedData = [];
 
     drivetrains.forEach((drivetrain) => {
-      let count = drivetrain.gearRatios.length;
-      let colors = this.lineColoration.generateGradient(drivetrain.color, count)
-      let dataset = this.toDataset(drivetrain, colors);
-      Array.prototype.push.apply(combinedData, dataset);
+      if(drivetrain.hidden !== true) {
+        let count = drivetrain.gearRatios.length;
+        let colors = this.lineColoration.generateGradient(drivetrain.color, count)
+        let dataset = this.toDataset(drivetrain, colors);
+        Array.prototype.push.apply(combinedData, dataset);
+      }
     })
 
     return combinedData;
