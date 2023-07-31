@@ -2,18 +2,6 @@ import { assert } from 'console';
 import ChartRenderer from '../../biz/ChartRenderer.js';
 const util = require('util')
 
-test('generate line colors', () => {
-  let drivetrains = [
-    {gearRatios: [4.236, 1]},
-    {gearRatios: [2.538, 1]},
-  ];
-
-  let underTest = new ChartRenderer(new MockColoration());
-  let actual = underTest.generateLineColors(drivetrains);
-  let expected = ["000000", "ffffff", "000000", "ffffff"];
-  expect(actual).toEqual(expected);
-});
-
 
 test('build data from drivetrains', () => {
   let drivetrains = [
@@ -102,7 +90,7 @@ test('get highest redline', () => {
 
 
 class MockColoration {
-  generateGradient(index, count) {
+  generateGradient(primary, count) {
     return ['000000', 'ffffff'];
   }
 }

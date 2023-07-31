@@ -13,6 +13,7 @@ export default class AccountInitializer {
         finalDrive: 3.31,
         gearRatios: [4.24, 2.54, 1.67, 1.24, 1, 0.7],
         redline: 6800,
+        color: "#0000ff",
       },
       {
         name: "Tall Rear Gears",
@@ -20,6 +21,7 @@ export default class AccountInitializer {
         finalDrive: 4.11,
         gearRatios: [4.24, 2.54, 1.67, 1.24, 1, 0.7],
         redline: 6800,
+        color: "#ff0000",
       },
     ];
 
@@ -35,6 +37,7 @@ export default class AccountInitializer {
         finalDrive: 1,
         gearRatios: [9.34],
         redline: 18000,
+        color: "#dd0000",
       },
       {
         name: "Tesla Model S Rear Motor",
@@ -42,6 +45,7 @@ export default class AccountInitializer {
         finalDrive: 1,
         gearRatios: [9.71],
         redline: 18000,
+        color: "#00dd00",
       },
       {
         name: "Porsche Taycan Rear Motor",
@@ -49,6 +53,7 @@ export default class AccountInitializer {
         finalDrive: 1,
         gearRatios: [15.1, 8.05],
         redline: 16000,
+        color: "#0000dd",
       },
     ];
 

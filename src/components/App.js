@@ -139,10 +139,28 @@ class App extends Component {
     if(comparisons.length <= 0) {
       locator.accountInitializer.initialize();
       comparisons = locator.comparisonDao.getAll();
+    } else {
+      this.rectifyColors(comparisons);
     }
 
     console.log('Established comparisons:', comparisons);
     return comparisons;
+  }
+
+  /**
+   * Some drivetrains that have been saved to users' localstores have no colors, which will cause this
+   * to blow up. While this will affect like six people, it's 100% of our userbase...
+   * 
+   * todo: probably move this to a ComparisonFetcher or something.
+   */
+  rectifyColors(comparisons) {
+    for(let comparison of comparisons) {
+      for(let drivetrain of comparison.drivetrains) {
+        if(!drivetrain.color) {
+          drivetrain.color = locator.lineColoration.getRandomColor();
+        }
+      }
+    }
   }
 }
 
