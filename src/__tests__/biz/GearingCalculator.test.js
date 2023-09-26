@@ -1,4 +1,4 @@
-import GearingCalculator from '../../biz/GearingCalculator.js';
+import GearingCalculator from '../../biz/GearingCalculator.ts';
 
 test('speed', () => {
   let expected = 128;

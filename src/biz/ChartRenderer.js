@@ -1,4 +1,4 @@
-import GearingCalculator from './GearingCalculator.js';
+import GearingCalculator from './GearingCalculator.ts';
 
 export default class ChartRenderer {
   constructor(lineColoration) {

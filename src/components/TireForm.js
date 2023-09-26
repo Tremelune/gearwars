@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import FormConverter from '../biz/FormConverter.js';
-import GearingCalculator from '../biz/GearingCalculator.js';
+import GearingCalculator from '../biz/GearingCalculator.ts';
 
 export default class TireForm extends Component {
   /** @params props: Tire size, ex: {tireSize: '235/45-17'}; */

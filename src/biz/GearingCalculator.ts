@@ -3,7 +3,7 @@ export default class GearingCalculator {
   * Calculates speed (to the nearest MPH) from engine RPM and drivetrain gearing. I pulled this jank math from:
   * http://www.hotrod.com/articles/speed-rpm-gear-ratio-tire-size-formula/
   */
-  static speed(tireDiameter, finalDrive, gearRatio, rpm) {
+  static speed(tireDiameter: number, finalDrive: number, gearRatio: number, rpm: number) {
     // 336.13 is magic constant used to convert inches to miles.
     const speed = (rpm * tireDiameter) / (finalDrive * gearRatio * 336.13);
     return Math.round(speed);
@@ -20,11 +20,18 @@ export default class GearingCalculator {
   *   aspectRatio: 40, // Millimeters
   * }
   */
-  static diameter(tire) {
-    let aspect = tire.aspectRatio / 100;
-    let numer = tire.width * aspect * 2;
-    let tireThickness = numer / 25.4; // Convert to inches...
-    let diameter = tireThickness + tire.wheelDiameter;
+  static diameter(tire: Tire) {
+    let aspect: number = tire.aspectRatio / 100;
+    let numer: number = tire.width * aspect * 2;
+    let tireThickness:number  = numer / 25.4; // Convert to inches...
+    let diameter: number = tireThickness + tire.wheelDiameter;
     return Number(diameter.toFixed(1));
   }
+}
+
+
+interface Tire {
+  aspectRatio: number,
+  width: number
+  wheelDiameter: number
 }
