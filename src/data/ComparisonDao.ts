@@ -1,5 +1,10 @@
 export default class ComparisonDao {
-  constructor(db, type) {
+  db: any
+  type: string
+
+  
+  // @ts-ignore
+  constructor(db, type: string) {
     this.db = db;
     this.type = type;
   }
@@ -9,15 +14,15 @@ export default class ComparisonDao {
     return this.db.getAll(this.type);
   }
 
-  get(id) {
+  get(id: string) {
     return this.db.get(this.type, id);
   }
 
-  save(comparison) {
+  save(comparison: Comparison) {
     return this.db.save(this.type, comparison);
   }
 
-  delete(id) {
+  delete(id: string) {
     this.db.delete(this.type, id);
   }
 }

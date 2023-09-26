@@ -1,4 +1,4 @@
-import ComparisonDao from '../data/ComparisonDao.js';
+import ComparisonDao from '../data/ComparisonDao.ts';
 import Datamabase from '../data/Datamabase.js';
 
 import AccountInitializer from './AccountInitializer.js';
