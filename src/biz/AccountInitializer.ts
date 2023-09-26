@@ -1,12 +1,17 @@
+import ComparisonDao from "../data/ComparisonDao";
+
 /** This is a way to get someone started with some representative vehicle instead of a confusing blank form/chart. */
 export default class AccountInitializer {
-  constructor(comparisonDao) {
+  comparisonDao: ComparisonDao
+
+
+  constructor(comparisonDao: ComparisonDao) {
     this.comparisonDao = comparisonDao;
   }
 
 
   initialize() {
-    let drivetrainsA = [
+    let drivetrainsA: Array<Drivetrain> = [
       {
         name: "Stock Rear gears",
         tireDiameter: 27.3, // Inches
@@ -25,12 +30,12 @@ export default class AccountInitializer {
       },
     ];
 
-    let comparisonA = {
+    let comparisonA: Comparison = {
       name: '2015 EcoBoost Mustang',
       drivetrains: drivetrainsA,
     }
 
-    let drivetrainsB = [
+    let drivetrainsB: Array<Drivetrain> = [
       {
         name: "Tesla Model S Front Motor",
         tireDiameter: 27.7, // Inches
@@ -57,7 +62,7 @@ export default class AccountInitializer {
       },
     ];
 
-    let comparisonB = {
+    let comparisonB: Comparison = {
       name: 'EVs',
       drivetrains: drivetrainsB,
     }

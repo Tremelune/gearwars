@@ -1,7 +1,7 @@
 import ComparisonDao from '../data/ComparisonDao.ts';
 import Datamabase from '../data/Datamabase.js';
 
-import AccountInitializer from './AccountInitializer.js';
+import AccountInitializer from './AccountInitializer.ts';
 import ChartRenderer from './ChartRenderer.js';
 import LineColoration from './LineColoration.js';
 
