@@ -12,9 +12,7 @@ import {
 } from 'chart.js';
 import {Scatter} from 'react-chartjs-2';
 
-/** Uses Chart.js and react-chartjs-2. */
-class Chart extends Component {
-  /**
+/**
    * todo Drivetrain should probably be a class...immutable...
    *
    * @props An array of at least one drivetrains:
@@ -31,69 +29,50 @@ class Chart extends Component {
    *   ]
    * }
    */
-  constructor(props) {
-    super(props);
+export default function Chart({maxSpeed, maxRpm, drivetrains}) {
+  let datasets = locator.chartRenderer.buildDataFromDrivetrains(drivetrains);
 
-    ChartJS.register(
-      CategoryScale,
-      LinearScale,
-      PointElement,
-      LineElement,
-      Title,
-      Tooltip,
-      Legend
-    );
-  }
-
-
-  render() {
-    let datasets = locator.chartRenderer.buildDataFromDrivetrains(this.props.drivetrains);
-
-    let options = {
-      scales: {
-        x: {
-          // If we don't floor, you get labels like '150.0000000000000'
-          max: Math.floor(this.props.maxSpeed),
-          ticks: {
-            stepSize: 10,
-          }
-        },
-        y: {
-          // If we don't floor, you get labels like '8,500.0000000000000'
-          max: Math.floor(this.props.maxRpm),
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      layout: {
-        padding: 20
-      },
-      animation: {
-        duration: 0
-      },
-      elements: {
-        point:{
-            radius: 0
+  let options = {
+    scales: {
+      x: {
+        // If we don't floor, you get labels like '150.0000000000000'
+        max: Math.floor(maxSpeed),
+        ticks: {
+          stepSize: 10,
         }
       },
-    }
-
-    let data = {
-      datasets: datasets,
-    }
-
-    return (
-      <div className="chart">
-        <Scatter
-          options={options}
-          data={data}
-        />
-      </div>
-    );
+      y: {
+        // If we don't floor, you get labels like '8,500.0000000000000'
+        max: Math.floor(maxRpm),
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    layout: {
+      padding: 20
+    },
+    animation: {
+      duration: 0
+    },
+    elements: {
+      point:{
+          radius: 0
+      }
+    },
   }
-}
 
-export default Chart;
+  let data = {
+    datasets: datasets,
+  }
+
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+  return (
+    <div className="chart">
+      <Scatter options={options} data={data}/>
+    </div>
+  );
+}
