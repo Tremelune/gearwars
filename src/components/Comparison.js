@@ -30,7 +30,7 @@ class Comparison extends Component {
           comparison={comparison}
           hasSaved={this.props.hasSaved}
           setComparison={this.setComparison}
-          reloadSavedComparisons={this.props.reloadSavedComparisons}/>
+          reload={this.props.reloadSavedComparisons}/>
 
         <div className="drivetrains">
           {comparison.drivetrains.map((drivetrain, index) => {
